@@ -16,7 +16,7 @@ class BrandComponent extends Component
     public function render()
     {
         $brands = Brand::where('name', 'like', '%'.$this->search.'%')->paginate(10);
-        return view('livewire.admin.brand-component', compact('brands'));
+        return view('livewire.admin.brand-component', compact('brands'))->layout('layouts.admin');
     }
 
 

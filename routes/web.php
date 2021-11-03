@@ -30,6 +30,8 @@ Route::name('user.')->prefix('user')->middleware(['check_if_user'])->group(funct
 Route::name('admin.')->prefix('admin')->middleware(['check_if_admin'])->group(function () {
     Route::get('/', Admin\AdminHome::class)->name('overview');
     Route::get('products', Admin\ProductComponent::class)->name('products');
+    Route::get('brands', Admin\BrandComponent::class)->name('brands');
+    Route::get('categories', Admin\CategoryComponent::class)->name('categories');
 }); 
 
 Route::middleware(['auth:sanctum', 'verified', 'check_if_admin'])->get('/dashboard', function () {

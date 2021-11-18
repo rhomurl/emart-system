@@ -60,7 +60,11 @@ class CategorySeeder extends Seeder
                 'name' => 'Hygiene',
                 'slug' => 'hygiene',
             ],
-            
+            [
+                'id' => 10,
+                'name' => 'Fish and Meat',
+                'slug' => 'fish-and-meat',
+            ],   
         ];
 
         Category::insert($category);

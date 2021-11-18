@@ -13,6 +13,8 @@ use Livewire\Component;
 
 class ProductComponent extends Component
 {
+    protected $listeners = ['updateComponent' => 'render'];
+
     use WithFileUploads;
     use WithPagination;
 
@@ -23,11 +25,12 @@ class ProductComponent extends Component
     {
         $products = Product::where('name', 'like', '%'.$this->search.'%')
         ->orwhere('selling_price', 'like', '%'.$this->search.'%')
-        ->orwhere('description', 'like', '%'.$this->search.'%')->paginate(2);
+        ->orwhere('description', 'like', '%'.$this->search.'%')->paginate(5);
 
         return view('livewire.admin.product-component', compact('products'))->layout('layouts.admin');
     }
 
-
-
+    public function edit($id){
+        $this->emit("openModal", "admin.product-edit", ["id" => $id]);
+    }
 }

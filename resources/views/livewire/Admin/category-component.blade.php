@@ -1,81 +1,97 @@
 @section('title', 'Categories')
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Categories
+
+<div class="container grid px-6 mx-auto">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        @yield('title')
     </h2>
-</x-slot>
 
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-            
-            @if (session()->has('message'))
-
-            <div id="hideDiv" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500">
-                <span class="text-xl inline-block mr-5 align-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </span>
-                <span class="inline-block align-middle mr-8">
-                  <b class="capitalize">Success! </b>{{ session('message') }}
-                </span>
-                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-                  <span>×</span>
-              
-                </button>
-              </div>
-
-            @endif
-
-            @can('create categories')
-                <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Create New Category</button>
-                @if($isOpen)
-                    @include('livewire.admin.create_category')
-                @endif
-            @endcan
-
+    <div class="px-3 my-6">
+        <button onclick="Livewire.emit('openModal', 'admin.category-modal')" class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            Create Category
+            <span class="ml-2" aria-hidden="true">+</span>
+        </button>
+        {{--@if($isOpen)
+            @include('livewire.admin.create_category')
+        @endif --}}
+        
+    </div>
+    <div class="w-full overflow-hidden rounded-lg shadow-xs border border-gray-200 dark:border-gray-700">
+        <div class="w-full overflow-x-auto">
             @if(!$isOpen)
-            <div class="mt-4 mb-5">
-                <input wire:model="search" type="text" placeholder="Search category" class=" px-2 py-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " autofocus/>
-            </div>
-            @endif
-
-            <table class="table-fixed w-full mt-4">
+        <div class="ml-5 mt-4 mb-5">
+            <input wire:model="search" type="text" placeholder="Search category" class="px-2 py-2 text-sm text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 " autofocus/>
+        </div>
+    @endif
+            <table class="w-full whitespace-no-wrap">
                 <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider w-20">No.</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">Name</th>
-                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">Action</th>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Slug</th>
+                        <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                     
                     @forelse($categories as $category)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ $category->id }}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ $category->name }}</td>
-                        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-                        @can('edit categories')
-                            <button wire:click="edit({{ $category->id }})" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Edit</button>
-                        @endcan
-                        
-                        @can('delete categories')
-                        <button wire:click.prevent="confirmDelete({{ $category->id }})" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Delete</button>
-                        @endcan
-                    
-                        </td>
-                    </tr>
+                        <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="px-4 py-3">
+                                <div class="flex items-center text-sm">
+                                    <!-- Avatar with inset shadow -->
+                                    <div>
+                                        <p class="font-semibold">{{ $category->name }}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">
+                                            {{ $category->product->count() }}
+                                            {{ $category->product->count() == '1' ? 'product': 'products' }} 
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td class="px-4 py-3">
+                                <div class="flex items-center text-sm">
+                                    <!-- Avatar with inset shadow -->
+                                    <div>
+                                        <p class="font-semibold">{{ $category->slug }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            
+                            <td class="px-4 py-3">
+                                <div class="flex items-center space-x-4 text-sm">
+                                    <button wire:click="edit({{ $category->id }})" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 hover:bg-gray-200 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div x-data="{ confirmDelete:false }" class="flex flex-wrap -mx-2 overflow-hidden">
+                                        <button x-show="!confirmDelete" x-on:click="confirmDelete=true" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 hover:bg-gray-200 focus:outline-none focus:shadow-outline-gray">
+                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="my-2 px-2 w-1/2 overflow-hidden">
+                                            <button x-show="confirmDelete" x-on:click="confirmDelete=false"  wire:click="confirmDelete({{ $category->id }})" class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">Yes</button>
+                                        </div>
+                                      
+                                        <div class="my-2 px-2 w-1/2 overflow-hidden">
+                                            <button x-show="confirmDelete" x-on:click="confirmDelete=false" class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">No</button>   
+                                        </div>
+                                      </div>
+                                </div>
+                            </td>
+                        </tr>
                     @empty
-                        <tr><td colspan="3" class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">No categories found</td></tr>
+                        <tr class="text-gray-700 dark:text-gray-400">
+                            <td class="w-full px-4 py-3">No results</td>
+                        </tr>
                     @endforelse
-
-                    @if(!$isOpen)
-                        {{ $categories->links() }}
-                    @endif
-
                 </tbody>
             </table>
+            @if(!$isOpen)
+                {{ $categories->links('vendor.pagination.custom') }}
+            @endif
         </div>
     </div>
 </div>

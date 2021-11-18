@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasRoles;
     use HasApiTokens;
@@ -30,8 +30,9 @@ class User extends Authenticatable
         'lastname',
         'email',
         'password',
-        'contact_number'
-    ];
+        'contact_number',
+        'validid',
+    ]; 
 
     /**
      * The attributes that should be hidden for serialization.

@@ -2,8 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="pragma" content="no-cache" />
-        <meta http-equiv="cache-control" content="max-age=604800" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="The owner of the Allena Mindoro Store is Mrs. Emelina Almarez, they started their business on May, 2006. They started with a small store and only sold a few. Gradually it grew, developed and had several more brances due to the cooperation of the siblings of the owner of this store.">
         <meta name="keywords" content="e-mart, Allena mindoro store, balete batangas">

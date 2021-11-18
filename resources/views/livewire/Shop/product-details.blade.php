@@ -1,23 +1,18 @@
-<section class="py-3 bg-light">
-  <div class="container">
-    <ol class="breadcrumb">
+<section class="section-content bg-white padding-y">
+    <div class="container">
+
+      <ol class="breadcrumb py-2">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item"><a href="#">{{ $product->category->name }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
     </ol>
-  </div>
-</section>
-
-<section class="section-content bg-white padding-y">
-    <div class="container">
-    
     <!-- ============================ ITEM DETAIL ======================== -->
         <div class="row">
             <aside class="col-md-6">
     <div class="card">
     <article class="gallery-wrap"> 
         <div class="img-big-wrap">
-          <div> <a href="#"><img src="{{ asset('images/items/') }}/{{ $product->image }}"></a></div>
+          <div> <a href="#"><img src="{{ asset('storage') }}/{{ $product->image }}"></a></div>
         </div> <!-- slider-product.// -->
 
         <!--<div class="thumbs-wrap">
@@ -84,7 +79,11 @@
     
         <div class="form-row">
             <div class="form-group col-md">
+              @if ($product->quantity == 0)
                 <a href="#" class="btn btn-primary"> 
+              @else
+                <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
+              @endif
                     <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span> 
                 </a>
             </div> <!-- col.// -->
@@ -113,7 +112,7 @@
 
       
         </div> <!-- col.// -->
-        
+        {{--
         <aside class="col-md-4">
           <div class="box">
             <h5 class="title-description">You may like</h5>
@@ -146,6 +145,7 @@
           
           </div> <!-- box.// -->
         </aside> <!-- col.// -->
+        --}}
       </div> <!-- row.// -->
       
       </div> <!-- container .//  -->

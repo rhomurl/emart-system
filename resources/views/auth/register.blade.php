@@ -6,7 +6,7 @@
         <article class="card-body">
             <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
             <x-jet-validation-errors class="mb-4" />
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
                     <div class="form-row">
                         <div class="col form-group">
@@ -68,6 +68,10 @@
                             <input class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" >
                         </div> <!-- form-group end.// -->  
                     </div>
+                    <div class="form-group">
+                        <label>Valid ID</label><br>
+                        <input id="valid_id" type="file" name="valid_id">
+                    </div> 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block"> Register  </button>
                     </div> <!-- form-group// -->    

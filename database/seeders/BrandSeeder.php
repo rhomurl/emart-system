@@ -40,6 +40,17 @@ class BrandSeeder extends Seeder
                 'name' => 'Colgate',
                 'slug' => 'colgate',
             ],
+            [
+                'id' => 6,
+                'name' => '555',
+                'slug' => '555',
+            ],
+            [
+                'id' => 7,
+                'name' => 'Argentina',
+                'slug' => 'argentina',
+            ],
+
         ];
 
         Brand::insert($brand);

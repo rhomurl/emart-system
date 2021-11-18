@@ -40,21 +40,16 @@
     <div class="row row-sm align-items-center">
         <div class="col-lg-2 col-md-3 col-6">
             <a href="{{ route('user_home') }}" class="brand-wrap">
-                <img class="logo" src="../images/logo.png">
+                <img class="logo" src="{{ asset('images/logo.png') }}">
             </a> <!-- brand-wrap.// -->
         </div>
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
             <div class="category-wrap dropdown d-inline-block float-md-right">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+               {{-- <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
                     <i class="fa fa-bars"></i> All category 
-                </button>
+                </button>--}}
                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                     <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                    <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                    <a class="dropdown-item" href="#">Auto / Transportation</a>
-                    <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                    <a class="dropdown-item" href="#">Home &amp; Garden / Construction / Lights </a>
-                    <a class="dropdown-item" href="#">Beauty &amp; Personal Care / Health </a> 
                 </div>
             </div>  <!-- category-wrap.// -->
         </div> <!-- col.// -->
@@ -74,46 +69,41 @@
         <div class="col-lg-3 col-sm-12 col-md-12 col-12">
             <div class="widgets-wrap float-md-right">
                 @guest
-                <div class="widget-header dropdown">
-                    <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
-                        <div class="icontext">
-                            <div class="icon">
-                                <i class="icon-sm rounded-circle border fa fa-user"></i>
+                    <div class="widget-header dropdown">
+                        <a href="#" data-toggle="dropdown" data-offset="20,10" aria-expanded="false">
+                            <div class="icontext">
+                                <div class="icon">
+                                    <i class="icon-sm rounded-circle border fa fa-user"></i>
+                                </div>
+                                <div class="text">
+                                    <small class="text-muted">Sign in | Join</small>
+                                    <div>My account <i class="fa fa-caret-down"></i> </div>
+                                </div>
                             </div>
-                            <div class="text">
-                                <small class="text-muted">Sign in | Join</small>
-                                <div>My account <i class="fa fa-caret-down"></i> </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(138px, 42px, 0px);">
-                        
-                        
-                        <form class="px-4 py-3" method="POST" action="{{ route('login') }}">
-                            @if ($errors->any())
-                            <script>
-                                window.location = "/login";
-                              </script>
-                            @endif
-                            <x-jet-validation-errors class="mb-4" />
-                            @csrf
-                            <div class="form-group">
-                              <label>Email address</label>
-                              <input id="email" name="email" class="form-control" placeholder="Email" type="email" name="email" :value="old('email')" required autofocus >
-                            </div>
-                            <div class="form-group">
-                              <label>Password</label>
-                              <input input id="password" name="password" class="form-control" placeholder="Password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                            </form>
-                            <hr class="dropdown-divider">
-                            <a class="dropdown-item" href="{{ route('register') }}">Don't have account? Sign up</a>
-                            @if (Route::has('password.request'))
-                                <a class="dropdown-item" href="{{ route('password.request') }}">Forgot password?</a>
-                            @endif
-                    </div> <!--  dropdown-menu .// -->
-                </div>  <!-- widget-header .// -->        
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(138px, 42px, 0px);">
+                            
+                            
+                            <form class="px-4 py-3" method="POST" action="{{ route('login') }}">
+                                <x-jet-validation-errors class="mb-4" />
+                                @csrf
+                                <div class="form-group">
+                                <label>Email address</label>
+                                <input id="email" name="email" class="form-control" placeholder="Email" type="email" name="email" :value="old('email')" required autofocus >
+                                </div>
+                                <div class="form-group">
+                                <label>Password</label>
+                                <input input id="password" name="password" class="form-control" placeholder="Password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                </form>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="{{ route('register') }}">Don't have account? Sign up</a>
+                                @if (Route::has('password.request'))
+                                    <a class="dropdown-item" href="{{ route('password.request') }}">Forgot password?</a>
+                                @endif
+                        </div> <!--  dropdown-menu .// -->
+                    </div>  <!-- widget-header .// -->        
                 @endguest
 
                 @auth
@@ -137,14 +127,7 @@
                             <small class="text"> Orders </small>
                         </a>
                     </div>
-                    <div class="widget-header">
-                        <a href="#" class="widget-view">
-                            <div class="icon-area">
-                                <i class="fa fa-shopping-cart"></i>
-                            </div>
-                            <small class="text"> Cart </small>
-                        </a>
-                    </div> 
+                    <livewire:shop.cart-icon/> 
 
                     <div class="widget-header dropdown show">
                         <a href="#" class="ml-4 icontext" data-toggle="dropdown" data-offset="20,10" aria-expanded="true">

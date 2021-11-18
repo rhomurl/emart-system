@@ -10,6 +10,6 @@ class AccountOverview extends Component
 {
     public function render()
     {
-        return view('livewire.user.account-overview')->layout('layouts.user');
+        return view('livewire.user.account-overview')->layout('layouts.user-profile');
     }
 }

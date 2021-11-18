@@ -126,29 +126,35 @@
         </header>
         
         <div class="row row-sm">
-            @foreach ($products as $product)
+
+
+            @foreach ($products1 as $product)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                     <div class="card card-sm card-product-grid">
-                        <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('images/items/') }}/{{ $product->image }}"> </a>
+                        <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
                         <figcaption class="info-wrap">
                             <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
                             <div class="price mt-1">PHP {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                            <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
+                                Add to cart</a>
                         </figcaption>
                     </div>
                 </div> <!-- col.// -->
             @endforeach
 
-            @foreach ($products1 as $product)
-                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                    <div class="card card-sm card-product-grid">
-                        <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('images/items/') }}/{{ $product->image }}"> </a>
-                        <figcaption class="info-wrap">
-                            <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
-                            <div class="price mt-1">PHP {{ $product->selling_price }}</div> <!-- price-wrap.// -->
-                        </figcaption>
-                    </div>
-                </div> <!-- col.// -->
-            @endforeach
+            @foreach ($products as $product)
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                <div class="card card-sm card-product-grid">
+                    <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
+                    <figcaption class="info-wrap">
+                        <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
+                        <div class="price mt-1">PHP {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                        <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
+                            Add to cart</a>
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+        @endforeach
         </div> 
             
         </section>

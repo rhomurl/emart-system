@@ -38,10 +38,10 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Account balance
+                    Total revenue
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    ₱ 0.00
+                    ₱ {{ $orderTotal }}
                 </p>
             </div>
         </div>
@@ -59,7 +59,7 @@
                     New sales
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    0
+                    {{ $orderCount }}
                 </p>
             </div>
         </div>

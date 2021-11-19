@@ -15,8 +15,12 @@ class HomeComponent extends Component
     public function render()
     {
         $categories = Category::limit(7)->get();
-        $products = Product::all(['id', 'name','slug','selling_price', 'image']);
-        $products1 = Product::inRandomOrder()->get();
+
+        $products = Product::where('quantity', '>', 0)->get();
+
+        $products1 = Product::inRandomOrder()
+        ->where('quantity', '>', 0)
+        ->get();
 
  
         return view('livewire.home-component', compact('categories', 'products', 'products1'))->layout('layouts.user');

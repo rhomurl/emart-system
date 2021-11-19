@@ -51,10 +51,10 @@
 
         @include('layouts.header')
 
-        <div>
+        <section class="section-content padding-y">
             <!-- Page Content -->
             {{ $slot }}
-        </div>
+        </section>
     
         @include('layouts.footer')
 

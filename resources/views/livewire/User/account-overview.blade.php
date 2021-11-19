@@ -13,7 +13,7 @@
                     <strong> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</strong> <br> 
                     <p class="mb-2"> {{ Auth::user()->email }}  <br>
                     {{ Auth::user()->contact_number }}</p> 
-                    <a href="#" class="btn btn-light btn-sm">Edit</a>
+                    {{--<a href="#" class="btn btn-light btn-sm">Edit</a>--}}
                 </div>
         </figure>
         <hr>
@@ -29,26 +29,26 @@
         <article class="card-group card-stat">
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">0</h4>
+                        <h4 class="title">{{ $ordercount }}</h4>
                     <span>Orders</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">0</h4>
+                        <h4 class="title">{{ $orderedcount }}</h4>
                     <span>Processing</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
                         <h4 class="title">0</h4>
-                    <span>Ready for Delivery</span>
+                    <span>Shipped</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
                         <h4 class="title">0</h4>
-                    <span>Delivered items</span>
+                    <span>Delivered Orders</span>
                 </div>
             </figure>
         </article>

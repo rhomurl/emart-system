@@ -22,12 +22,16 @@ Route::get('redirects', 'App\Http\Controllers\AuthRedirect@index')->middleware('
 
 //Shop Routes
 Route::get('/product/{slug}', Shop\ProductDetails::class)->name('product.details');
+Route::get('/categories', Shop\CategoryPage::class)->name('categorylist');
 Route::get('/cart', Shop\ShoppingCart::class)->name('cart');
 Route::get('/checkout', Shop\Checkout::class)->name('checkout');
+Route::get('/checkout/success', Shop\CheckoutSuccess::class)->name('checkout.success');
 
 Route::name('user.')->prefix('user')->middleware(['check_if_user', 'verified'])->group(function () {
     Route::get('/overview', User\AccountOverview::class)->name('overview');
     Route::get('/address', User\AddressManagement::class)->name('address');
+    Route::get('/orders', User\MyOrders::class)->name('orders');
+    Route::get('/order/{order_id}', User\OrderDetails::class)->name('order.details');
     Route::get('/address/create', User\AddressCreate::class)->name('address.create');
     Route::get('/address/edit/{id}', User\AddressEdit::class)->name('address.edit');
 }); 
@@ -38,6 +42,7 @@ Route::name('admin.')->prefix('admin')->middleware(['check_if_admin'])->group(fu
     Route::get('brands', Admin\BrandComponent::class)->name('brands');
     Route::get('categories', Admin\CategoryComponent::class)->name('categories');
     Route::get('usermanagement', Admin\UserManagement::class)->name('manageuser');
+    Route::get('orders', Admin\UserOrders::class)->name('orders');
 }); 
 
 Route::middleware(['auth:sanctum', 'verified', 'check_if_admin'])->get('/dashboard', function () {

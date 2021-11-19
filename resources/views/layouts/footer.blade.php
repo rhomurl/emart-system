@@ -63,18 +63,8 @@
 					<h6 class="title">About</h6>
 					<ul class="list-unstyled">
 						<li> <a href="#">About us</a></li>
-						<li> <a href="#">Services</a></li>
-						<li> <a href="#">Rules and terms</a></li>
-						<li> <a href="#">Blogs</a></li>
-					</ul>
-				</aside>
-				<aside class="col-sm-3 col-md-2">
-					<h6 class="title">Services</h6>
-					<ul class="list-unstyled">
-						<li> <a href="#">Help center</a></li>
-						<li> <a href="#">Money refund</a></li>
-						<li> <a href="#">Terms and Policy</a></li>
-						<li> <a href="#">Open dispute</a></li>
+						<li> <a href="#">Shipping Policy</a></li>
+						<li> <a href="#">Terms of Service</a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-3  col-md-2">
@@ -83,8 +73,7 @@
 						<li> <a href="{{ route('login') }}"> User Login </a></li>
 						<li> <a href="{{ route('register') }}"> User Register </a></li>
 						<li> <a href="{{ route('user.overview') }}"> Account Overview </a></li>
-						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="#"> My Wishlist </a></li>
+						<li> <a href="{{ route('user.orders') }}"> My Orders </a></li>
 					</ul>
 				</aside>
 				<aside class="col-sm-2  col-md-2">

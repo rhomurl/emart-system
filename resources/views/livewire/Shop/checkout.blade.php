@@ -1,131 +1,136 @@
-<section class="section-content padding-y">
-    <div class="container" style="max-width: 720px;">
+
+<div class="container" style="max-width:720px;">
+  @if($this->checkout_message)
+    <div class="alert alert-danger" role="alert">
+        {{ $this->checkout_message}}
+    </div>
+  @endif
+  <form wire:submit.prevent="placeOrder">
+         
+    <h4 class="card-title mb-4">Delivery Address</h4>
+  <div class="row">
     
-    <div class="card mb-4">
-          <div class="card-body">
-          <h4 class="card-title mb-3">Delivery info</h4>
+
+    @foreach ($addresses as $address)
+          <div class="col-md-6">
+              <article class="box mb-4">
+                  <h6>{{ $address->entry_firstname }} {{ $address->entry_lastname }}</h6>
+                  <p>{{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}<br>{{ $address->entry_phonenumber }}  </p>
+                  <input wire:model="address_book_id" value="{{ $address->id }}" type="radio" name="address">
+              </article>
+          </div>  <!-- col.// -->
+          
+      @endforeach
+      @error('address_book_id')
+        <span class="text-danger">
+            {{ $message }}
+        </span>
+      @enderror
+
+  <main class="col-md-12">
+        <h4 class="card-title mb-4">Products</h4>
+  <div class="card">
     
-          <div class="form-row">
-                <div class="form-group col-sm-6">
-                    <label class="js-check box">
-                        <input type="radio" name="dostavka" value="option1" checked="">
-                        <h6 class="title">Standart delivery</h6>
-                        <p class="text-muted">Free by airline within 20 days</p>
-                    </label> <!-- js-check.// -->
-                </div>
-                <div class="form-group col-sm-6">
-                    <label class="js-check box active">
-                        <input type="radio" name="dostavka" value="option1">
-                        <h6 class="title">Fast delivery</h6>
-                        <p class="text-muted">Extra 20$ will be charged </p>
-                    </label> <!-- js-check.// -->
-                </div>
-            </div> <!-- form row.// -->
+
+      <table class="table table-borderless table-shopping-cart">
+      <thead class="text-muted">
+      @if(!$cartItems->count() == 0)
+          <tr class="small text-uppercase">
+          <th scope="col">Product</th>
+          <th scope="col" width="120">Quantity</th>
+          <th scope="col" width="120">Price</th>
+          <th scope="col" class="text-right" width="200"> </th>
+          </tr>
+      @endif
+      </thead>
+      <tbody>
+      @foreach ($cartItems as $cartItem)
+          <tr>
+              <td>
+                  <figure class="itemside">
+                      <div class="aside">
+                          <a href="#">
+                          <img src="{{ asset('storage') }}/{{ $cartItem->image }}" class="img-sm">
+                          </a>
+                      </div>
+                      <figcaption class="info">
+                          <a href="#" class="title text-dark">{{ $cartItem->name }}</a>
+                          <p class="text-muted small">{{--Size: XL, Color: blue, <br>--}}Brand: {{ $cartItem->brand }}</p>
+                      </figcaption>
+                  </figure>
+              </td>
+              <td> 
+                  <div class="form-inline">
+                      {{ $cartItem->qty }}
+                  </div>
+              </td>
+              <td> 
+                  <div class="price-wrap"> 
+                      <var class="price">₱ {{ $cartItem->selling_price * $cartItem->qty }}</var> 
+                      <small class="text-muted">₱ {{ $cartItem->selling_price }}  </small> 
+                  </div> <!-- price-wrap .// -->
+              </td>
+             
+          </tr>
+      @endforeach
+
+      </tbody>
+      </table>
+
+      
+
+  
+
+      
+  </div> <!-- card.// -->
+  <div class="card mb-4">
+    <div class="card-body">
+    <h4 class="card-title mb-4">Payment Method</h4>
+    <form role="form" style="max-width:380px;">
+      @if ($this->payment_mode)
+        <label class="js-check box active">
+      @else
+        <label class="js-check box">
+      @endif
+        <input wire:model="payment_mode" value="cod" type="radio" name="payment_mode">
+        <h6 class="title">Cash on Delivery</h6>
+        <p class="text-muted">Payment will be given upon delivery</p>
+      </label> <!-- form-group.// -->
+    </div> <!-- card-body.// -->
+    @error('payment_mode')
+      <span class="text-danger">
+          {{ $message }}
+      </span>
+    @enderror
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+    <h4 class="card-title mb-4">Order Total</h4>
+      @if(Session::has('checkout'))
+        
+      <span class="text-xl">Subtotal:</span><span class="text-xl"> PHP {{ Session::get('checkout')['subtotal'] }}</span><br>
     
-        <div class="form-row">
-            <div class="col form-group">
-                <label>First name</label>
-                  <input type="text" class="form-control" placeholder="">
-            </div> <!-- form-group end.// -->
-            <div class="col form-group">
-                <label>Last name</label>
-                  <input type="text" class="form-control" placeholder="">
-            </div> <!-- form-group end.// -->
-        </div> <!-- form-row end.// -->
+      <span class="text-xl">Delivery fee:</span> <span class="text-xl"> PHP {{ Session::get('checkout')['shipping'] }}<br>
     
-        <div class="form-row">
-            <div class="col form-group">
-                <label>Email</label>
-                  <input type="email" class="form-control" placeholder="">
-            </div> <!-- form-group end.// -->
-            <div class="col form-group">
-                <label>Phone</label>
-                  <input type="text" class="form-control" placeholder="">
-            </div> <!-- form-group end.// -->
-        </div> <!-- form-row end.// -->
+      <span class="text-xl">Incl. Tax:</span> <span class="text-xl"> PHP {{ Session::get('checkout')['tax'] }}</span><br>
     
-        <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Country</label>
-              <select id="inputState" class="form-control">
-                <option> Choose...</option>
-                  <option>Uzbekistan</option>
-                  <option>Russia</option>
-                  <option selected="">United States</option>
-                  <option>India</option>
-                  <option>Afganistan</option>
-              </select>
-            </div> <!-- form-group end.// -->
-            <div class="form-group col-md-6">
-              <label>City</label>
-              <input type="text" class="form-control">
-            </div> <!-- form-group end.// -->
-        </div> <!-- form-row.// -->
-        <div class="form-group">
-            <label>Adress</label>
-           <textarea class="form-control" rows="2"></textarea>
-        </div> <!-- form-group// -->  
-    
-          </div> <!-- card-body.// -->
-        </div>  <!-- card .// -->
-    
-    
-            <div class="card mb-4">
-          <div class="card-body">
-          <h4 class="card-title mb-4">Payment</h4>
-          <form role="form" style="max-width:380px;">
-                <div class="form-group">
-                <label for="username">Name on card</label>
-                <input type="text" class="form-control" name="username" placeholder="Ex. John Smith" required="">
-                </div> <!-- form-group.// -->
-    
-                <div class="form-group">
-                <label for="cardNumber">Card number</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" name="cardNumber" placeholder="">
-                    <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp; 
-                            <i class="fab fa-cc-mastercard"></i> 
-                        </span>
-                    </div>
-                </div> <!-- input-group.// -->
-                </div> <!-- form-group.// -->
-    
-                <div class="row">
-                    <div class="col-md flex-grow-0">
-                        <div class="form-group">
-                            <label class="hidden-xs">Expiration</label>
-                            <div class="form-inline" style="min-width: 220px">
-                                <select class="form-control" style="width:100px">
-                                    <option>MM</option>
-                                    <option>01 - Janiary</option>
-                                    <option>02 - February</option>
-                                    <option>03 - February</option>
-                                </select>
-                                <span style="width:20px; text-align: center"> / </span>
-                                <select class="form-control" style="width:100px">
-                                    <option>YY</option>
-                                    <option>2018</option>
-                                    <option>2019</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
-                            <input class="form-control" required="" type="text">
-                        </div> <!-- form-group.// -->
-                    </div>
-                </div> <!-- row.// -->
-                <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
-            </form>
-          </div> <!-- card-body.// -->
-        </div> <!-- card .// -->
-    
-    
+      
+      
+      <span class="font-bold text-xl">Grand Total:</span> <span class="text-xl">₱{{ Session::get('checkout')['total'] }}</span>
+      <br><br>
+      @endif
+    </div> <!-- card-body.// -->
+  </div>
+  
+  
+  <button class="btn btn-primary float-md-right"> Place Order <i class="fa fa-chevron-right"></i> </button>
+  </main> <!-- col.// -->
+
+  </div>
+</div> <!-- container .//  -->
+
+
     <br><br> 
     
-    </div> <!-- container .//  -->
-    </section>
+   

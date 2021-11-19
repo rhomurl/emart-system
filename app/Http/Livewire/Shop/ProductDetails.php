@@ -8,9 +8,11 @@ use Livewire\Component;
 
 class ProductDetails extends Component
 {
-    //protected $listeners = ['increaseQuantity' => 'addToCart'];
+    protected $listeners = ['increaseQuantity' => 'addToCart'];
+    
     public $cartProducts = [];
-    public $slug;
+    public $slug, $qty;
+    
 
     public function mount ($slug)
     {
@@ -19,18 +21,26 @@ class ProductDetails extends Component
 
     public function render()
     {
+        
+
         $query = Product::query();
 
         $product = (clone $query)
             ->where('slug', $this->slug)
             ->first();
 
+        $productId = (clone $query)
+        ->select('id')
+        ->where('slug', $this->slug);
+        
+        
         if(!$product){
             abort(404);
         }
 
         $related_products = (clone $query)
             ->where('category_id', $product->category_id)
+            ->whereNotIn('id', $productId)
             ->inRandomOrder()
             ->limit(5)
             ->get();
@@ -39,7 +49,8 @@ class ProductDetails extends Component
             ->layout('layouts.user');
     }
 
-    public function addToCart($productId)
+    
+    public function addToCart($productId, $qty)
     {
         if(!Auth::check()){
             return redirect()->route('login');
@@ -50,14 +61,25 @@ class ProductDetails extends Component
                     ->first();
 
         if (!$cart) {
-            Cart::create(['user_id' => Auth::id(), 'product_id' => $productId, 'qty' => 1]);
+            Cart::create(['user_id' => Auth::id(), 'product_id' => $productId, 'qty' => $qty]);
         } 
         else {
-            $cart->update(['qty' => $cart->qty + 1]);
+            $cart->update(['qty' => $cart->qty + $qty]);
         }
         $this->cartProducts[] = $productId;
         $this->emit('updateCart');
 
         session()->flash('message', 'Product Added to Cart');
     }
+
+    public function minusQty(){
+        if($this->qty > 1){
+            $this->qty = $this->qty - 1;
+        }
+    }
+    public function addQty(){
+        $this->qty = $this->qty + 1;
+
+    }
+    
 }

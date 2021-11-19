@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class AddressManagement extends Component
 {
+    public $address_id;
+    
     public function render()
     {
         $addresses = AddressBook::with('barangay.city')

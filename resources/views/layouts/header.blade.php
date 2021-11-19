@@ -28,7 +28,7 @@
             -->
         </ul>
         <ul class="navbar-nav">
-            <li><a href="#" class="nav-link"> <i class="fa fa-comment"></i> Live chat </a></li>
+            <li><a href="mailto:ems.almarez@gmail.com" class="nav-link"> <i class="fa fa-comment"></i> Email </a></li>
             <li><a href="tel:+639956093956" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
         </ul> <!-- list-inline //  -->
       </div> <!-- navbar-collapse .// -->
@@ -120,7 +120,7 @@
                     </div>
                 -->
                     <div class="widget-header mr-3">
-                        <a href="#" class="widget-view">
+                        <a href="{{ route('user.orders') }}" class="widget-view">
                             <div class="icon-area">
                                 <i class="fa fa-store"></i>
                             </div>
@@ -139,7 +139,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-26px, 46px, 0px);">
                             <a class="dropdown-item" href="{{ route('user.overview') }}">Overview</a>
-                            <a class="dropdown-item" href="#">My orders</a>
+                            <a class="dropdown-item" href="{{ route('user.orders') }}">My orders</a>
                             <hr class="dropdown-divider">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

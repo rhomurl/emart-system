@@ -63,11 +63,11 @@
         <div class="form-group col-md flex-grow-0">
           <div class="input-group mb-2 input-spinner">
             <div class="input-group-prepend">
-              <button class="btn btn-light" type="button" id="button-minus"> - </button>
+              <button wire:click.prevent="minusQty" class="btn btn-light" type="button" id="button-minus"> - </button>
             </div>
-            <input type="text" class="form-control" value="1">
+            <input wire:model="qty" type="text" class="form-control" value="1">
             <div class="input-group-append">
-              <button class="btn btn-light" type="button" id="button-plus"> + </button>
+              <button wire:click.prevent="addQty" class="btn btn-light" type="button" id="button-plus"> + </button>
             </div>
           </div>
           {{ $product->quantity }} pieces available
@@ -82,7 +82,7 @@
               @if ($product->quantity == 0)
                 <a href="#" class="btn btn-primary"> 
               @else
-                <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
+                <a wire:click.prevent="addToCart({{ $product->id }}, {{ $this->qty }})" href="#" class="btn btn-primary"> 
               @endif
                     <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span> 
                 </a>
@@ -157,47 +157,19 @@
 <div class="container">
     <div class="card card-body">
       
-      <h5 class="title-description">Recently viewed</h5>
+      <h5 class="title-description">Related products</h5>
       <div class="row">
+        @foreach ($related_products as $related_product)
         <div class="col-md-3">
           <figure class="itemside mb-2">
-            <div class="aside"><img src="../images/items/1.jpg" class="border img-sm"></div>
+            <div class="aside"><img src="{{ asset('storage') }}/{{ $related_product->image }}" class="border img-sm"></div>
             <figcaption class="info align-self-center">
-              <a href="#" class="title">Product 1</a>
-              <strong class="price">PHP 241.99</strong>
+              <a href="{{ route('product.details', $related_product->slug ) }}" class="title">{{ $related_product->name }}</a>
+              <strong class="price">PHP {{ $related_product->selling_price }}</strong>
             </figcaption>
           </figure>
         </div> <!-- col.// -->
-    
-        <div class="col-md-3">
-          <figure class="itemside mb-2">
-            <div class="aside"><img src="../images/items/2.jpg" class="border img-sm"></div>
-            <figcaption class="info align-self-center">
-              <a href="#" class="title">Product 2</a>
-              <strong class="price">PHP 241.99</strong>
-            </figcaption>
-          </figure>
-        </div> <!-- col.// -->
-    
-        <div class="col-md-3">
-          <figure class="itemside mb-2">
-            <div class="aside"><img src="../images/items/3.jpg" class="border img-sm"></div>
-            <figcaption class="info align-self-center">
-              <a href="#" class="title">Product 3</a>
-              <strong class="price">PHP 241.99</strong>
-            </figcaption>
-          </figure>
-        </div> <!-- col.// -->
-    
-        <div class="col-md-3">
-          <figure class="itemside mb-2">
-            <div class="aside"><img src="../images/items/4.jpg" class="border img-sm"></div>
-            <figcaption class="info align-self-center">
-              <a href="#" class="title">Product 4</a>
-              <strong class="price">PHP 241.99</strong>
-            </figcaption>
-          </figure>
-        </div> <!-- col.// -->
+        @endforeach <!-- col.// -->
       </div> <!-- row.// -->
     </div>
 </div><br><br>

@@ -35,8 +35,7 @@ class ProductEdit extends ModalComponent
             'description' => 'required|regex:/[a-zA-Z0-9\s]+/|max:255',
             'selling_price' => 'required|numeric|min:0|max:1000000.00',
             'quantity' => 'required|integer|min:0|max:999999',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif
-            max:2048',
+            //'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = Product::updateOrCreate(['id' => $this->product_id],
@@ -45,7 +44,7 @@ class ProductEdit extends ModalComponent
             'brand_id' => $this->brand_id,
             'description' => $this->description,
             'selling_price' => $this->selling_price,
-            'image' =>  $this->image->store('images/products', 'public'),
+           // 'image' =>  $this->image->store('images/products', 'public'),
             'quantity' => $this->quantity]
         );
         

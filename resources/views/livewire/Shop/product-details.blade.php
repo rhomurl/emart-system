@@ -65,7 +65,7 @@
             <div class="input-group-prepend">
               <button wire:click.prevent="minusQty" class="btn btn-light" type="button" id="button-minus"> - </button>
             </div>
-            <input wire:model="qty" type="text" class="form-control" value="1">
+            <input wire:model="qty" type="text" class="form-control">
             <div class="input-group-append">
               <button wire:click.prevent="addQty" class="btn btn-light" type="button" id="button-plus"> + </button>
             </div>
@@ -82,7 +82,12 @@
               @if ($product->quantity == 0)
                 <a href="#" class="btn btn-primary"> 
               @else
-                <a wire:click.prevent="addToCart({{ $product->id }}, {{ $this->qty }})" href="#" class="btn btn-primary"> 
+                  @if(!$this->qty)
+                    <a wire:click.prevent="addToCart({{ $product->id }}, 1)" href="#" class="btn btn-primary"> 
+                  @else 
+                    <a wire:click.prevent="addToCart({{ $product->id }}, {{ $this->qty }})" href="#" class="btn btn-primary"> 
+                  @endif
+                
               @endif
                     <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span> 
                 </a>
@@ -162,7 +167,11 @@
         @foreach ($related_products as $related_product)
         <div class="col-md-3">
           <figure class="itemside mb-2">
-            <div class="aside"><img src="{{ asset('storage') }}/{{ $related_product->image }}" class="border img-sm"></div>
+            <div class="aside">
+              <a href="{{ route('product.details', $related_product->slug ) }}">
+                <img src="{{ asset('storage') }}/{{ $related_product->image }}" class="border img-sm">
+              </a>
+              </div>
             <figcaption class="info align-self-center">
               <a href="{{ route('product.details', $related_product->slug ) }}" class="title">{{ $related_product->name }}</a>
               <strong class="price">PHP {{ $related_product->selling_price }}</strong>

@@ -2,15 +2,13 @@
     Add Address    
 @endsection
 <div>
-    {{--<div class="alert alert-info mb-4">
-        Fill in the form. Choose the country, and cities list will be updated.
-    </div>
-
-    <hr />--}}
-
-
     
     <div class="card mb-4">
+        @if ($this->error_message)
+        <div class="alert alert-warning" role="alert">
+            {{ $this->error_message }}
+        </div>
+        @endif
         <div class="col md-3 p-3">
             <a href="{{ route('user.address') }}" class="btn btn-primary float-md-left"><i class="fa fa-chevron-left"></i> Back to My Address </a>
         </div>
@@ -80,6 +78,7 @@
                     @if ($barangays->count() == 0)
                         <option value="">-- choose city first --</option>
                     @endif
+
                     @foreach ($barangays as $barangay)
                         <option value="{{ $barangay->id }}">{{ $barangay->name }}</option>
                     @endforeach
@@ -88,15 +87,6 @@
           </div> <!-- form-row.// -->
   
           <div class="form-row">
-              <div class="form-group col-md-6">
-                <label>Postal Code</label>
-                <input wire:model="entry_postcode" name="entry_postcode" type="number" class="form-control" placeholder="01234" required>
-                @error('entry_postcode')
-                    <span class="text-danger">
-                        {{ $message }}
-                    </span>
-                    @enderror
-              </div> <!-- form-group end.// -->
               <div class="form-group col-md-6">
                 <label>Phone</label>
                 <input wire:model="entry_phonenumber" name="entry_phonenumber" type="text" class="form-control" placeholder="+639152390900" required>

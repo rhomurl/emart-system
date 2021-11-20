@@ -2,14 +2,22 @@
 
 namespace App\Http\Livewire\Shop;
 
-use App\Models\Product;
+use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderProduct;
-use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\AddressBook;
+
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 use DB;
+
+use App\Notifications\OrderConfirmation;
+
+use Illuminate\Notifications\Notifiable;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -59,7 +67,7 @@ class Checkout extends Component
         foreach ($cart as $cartProduct){
             if(!isset($products[$cartProduct->product_id]) 
                 || $products[$cartProduct->product_id] < $cartProduct->qty) {
-                $this->checkout_message ='Error: Product ' . $cartProduct->product->name . ' not found in stock';
+                $this->checkout_message = 'Error: Product ' . $cartProduct->product->name . ' not found in stock';
             }
         }
 
@@ -99,11 +107,30 @@ class Checkout extends Component
 
                 
                 session()->flash('orderid', $order->id);
+                
+                $user = Auth::user();
+                $orderData = [
+                    'greeting' => 'Thank you for your order!',
+                    'name' => 'Hello ' . $user->firstname . ',',
+                    'body' => ' Thank you for your order from Allena Mindoro.',
+                    'orderText' => 'View Order',
+                    'orderDetails' => [
+                        'id' => $order->id,
+                        'total' => $order->total,
+                        'time' => $order->created_at->format('F j Y h:i A'),
+                    ],
+                    'url' => url(route('user.order.details', $order->id )),
+                    'thankyou' => ''
+                ];
+
+                $user->notify(new OrderConfirmation($orderData));
+
                 return redirect(route('checkout.success'));
             });
         } catch (\Exception $exception){
             $this->checkout_message = "Something wrong" . $exception;
-        }  
+        }
+
 
 
         /*
@@ -181,5 +208,10 @@ class Checkout extends Component
         session()->flash('orderid', $order->id);
         return redirect(route('checkout.success'));
         */
+    }
+
+    public function sendTestNotification($orderId, $orderTotal)
+    {
+        
     }
 }

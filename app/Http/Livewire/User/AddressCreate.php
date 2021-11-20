@@ -13,7 +13,7 @@ class AddressCreate extends Component
     public $barangays;
     public $cities;
 
-    public $entry_company, $entry_firstname, $entry_lastname, $entry_street_address, $entry_phonenumber, $entry_postcode;
+    public $error_message, $entry_company, $entry_firstname, $entry_lastname, $entry_street_address, $entry_phonenumber, $entry_postcode;
 
     public $barangay;
     public $city;
@@ -45,32 +45,36 @@ class AddressCreate extends Component
     public function storeAddress()
     {
         $this->validate([
-            'entry_company' => 'required|string|max:255',
+            'entry_company' => 'string|max:255',
             'entry_firstname' => 'required|string|max:255',
             'entry_lastname' => 'required|string|max:255',
             'entry_street_address' => 'required|max:255',
             'entry_phonenumber' => 'required|max:15',
-            'entry_postcode' => 'required|string|max:5',
         ]);
 
-        AddressBook::create([
-            'user_id' => Auth::user()->id,
-            'entry_company' => $this->entry_company,
-            'entry_firstname' => $this->entry_firstname,
-            'entry_lastname' => $this->entry_lastname,
-            'entry_street_address' => $this->entry_street_address,
-            'barangay_id' => $this->barangay,
-            'entry_phonenumber' => $this->entry_phonenumber,
-            'entry_postcode' => $this->entry_postcode,
-        ]);
+        try{
+            AddressBook::create([
+                'user_id' => Auth::user()->id,
+                'entry_company' => $this->entry_company,
+                'entry_firstname' => $this->entry_firstname,
+                'entry_lastname' => $this->entry_lastname,
+                'entry_street_address' => $this->entry_street_address,
+                'barangay_id' => $this->barangay,
+                'entry_phonenumber' => $this->entry_phonenumber,
+            ]);
 
-        $this->entry_company = '';
-        $this->entry_firstname = '';
-        $this->entry_lastname = '';
-        $this->entry_street_address = '';
-        $this->entry_phonenumber = '';
-        $this->entry_postcode = '';
+            $this->entry_company = '';
+            $this->entry_firstname = '';
+            $this->entry_lastname = '';
+            $this->entry_street_address = '';
+            $this->entry_phonenumber = '';
 
-        $this->cities = collect();
+            $this->cities = collect();
+
+            session()->flash('message', 'Address Created Successfully');
+            return redirect(route('user.address'));
+        }  catch (\Exception $exception){
+            $this->error_message = "Something went wrong";
+        }
     }
 }

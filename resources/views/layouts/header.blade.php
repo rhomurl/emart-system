@@ -53,19 +53,9 @@
                 </div>
             </div>  <!-- category-wrap.// -->
         </div> <!-- col.// -->
-        <div class="col-lg  col-md-6 col-sm-12 col">
-            <form action="#" class="search-header">
-                <div class="input-group w-100">
-                    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
-                    
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="submit">
-                        <i class="fa fa-search"></i>
-                      </button>
-                    </div>
-                </div>
-            </form> <!-- search-wrap .end// -->
-        </div> <!-- col.// -->
+        
+        <livewire:shop.product-search/>
+
         <div class="col-lg-3 col-sm-12 col-md-12 col-12">
             <div class="widgets-wrap float-md-right">
                 @guest

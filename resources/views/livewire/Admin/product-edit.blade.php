@@ -93,7 +93,7 @@
                 <span class="text-gray-700">
                     Image
                 </span><br>
-                <input wire:model="image" type="file" name="image" required>
+                <input wire:model="image" type="file" name="image">
                 @error('image')
                     <span class="text-xs text-red-600 dark:text-red-400">
                         {{ $message }}

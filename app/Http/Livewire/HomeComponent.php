@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+
+
 use Livewire\Component;
 
 class HomeComponent extends Component
@@ -16,10 +18,13 @@ class HomeComponent extends Component
     {
         $categories = Category::limit(7)->get();
 
-        $products = Product::where('quantity', '>', 0)->get();
+        $products = Product::where('quantity', '>', 0)
+            ->limit(6)
+            ->get();
 
         $products1 = Product::inRandomOrder()
         ->where('quantity', '>', 0)
+        ->limit(12)
         ->get();
 
  
@@ -45,5 +50,10 @@ class HomeComponent extends Component
         }
         
         $this->emit('updateCart');
+        
+        session()->flash('message', 'Product Added to Cart');
+        return redirect(route('cart'));
     }
+
+    
 }

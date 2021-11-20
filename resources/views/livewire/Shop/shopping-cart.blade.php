@@ -3,10 +3,10 @@
     <div class="row">
         
     <main class="col-md-9">
-        @if($this->checkout_message)
-            <div class="alert alert-danger" role="alert">
-                {{ $this->checkout_message}}
-             </div>
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
         @endif
     <div class="card">
         
@@ -65,8 +65,7 @@
         </table>
 
             <div class="card-body border-top">
-                <a wire:click.prevent="setAmountForCheckout()" href="#" class="btn btn-primary float-md-right"> Checkout <i class="fa fa-chevron-right"></i> </a>
-                <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                <a href="{{ url()->previous() }}" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
             </div>	
     </div> <!-- card.// -->
 
@@ -76,21 +75,7 @@
 
     </main> <!-- col.// -->
         <aside class="col-md-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label>Have coupon?</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="" placeholder="Coupon code">
-                            <span class="input-group-append"> 
-                                <button class="btn btn-primary">Apply</button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-                </div> <!-- card-body.// -->
-            </div>  <!-- card .// -->
+            
             <div class="card">
                 <div class="card-body">
                         <dl class="dlist-align">
@@ -110,6 +95,16 @@
                             <img src="{{ asset("images/misc/payment_method.jpg") }}">
                         </p>
                         
+                </div> <!-- card-body.// -->
+            </div>  <!-- card .// -->
+            <div class="card mb-3">
+                <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <a wire:click.prevent="setAmountForCheckout()" href="#" class="btn btn-primary btn-block"> Checkout <i class="fa fa-chevron-right"></i> </a>
+                        </div>
+                    </div>
+                </form>
                 </div> <!-- card-body.// -->
             </div>  <!-- card .// -->
         </aside> <!-- col.// -->

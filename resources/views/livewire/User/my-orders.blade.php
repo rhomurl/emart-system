@@ -1,5 +1,6 @@
-
-   
+@section('title')
+    My Orders
+@endsection
 
 <div>
     @if($orders)

@@ -13,7 +13,7 @@ class AccountOverview extends Component
     {
         $ordercount = Order::where('user_id', Auth::id())->count();
         $orderedcount = Order::where('user_id', Auth::id())
-        ->orWhere('status', 'ordered')
+        ->where('status', 'ordered')
         ->count();
         return view('livewire.user.account-overview', compact('ordercount', 'orderedcount'))->layout('layouts.user-profile');
     }

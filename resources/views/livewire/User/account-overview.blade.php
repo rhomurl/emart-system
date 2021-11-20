@@ -94,6 +94,6 @@
         </div> <!-- col.// -->
     </div> <!-- row.// -->
 
-    <a href="#" class="btn btn-outline-primary btn-block"> See all orders <i class="fa fa-chevron-down"></i>  </a>
+    <a href="{{ route('user.orders') }}" class="btn btn-outline-primary btn-block"> See all orders <i class="fa fa-chevron-down"></i>  </a>
     </div> <!-- card-body .// -->
 </article> <!-- card.// -->

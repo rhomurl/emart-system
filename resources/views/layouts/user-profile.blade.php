@@ -39,7 +39,7 @@
         <link href="{{ asset("fonts/fontawesome/css/all.min.css") }}" type="text/css" rel="stylesheet">
 
         <!-- custom style -->
-        <link href="{{ asset("css/ui.css") }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset("css/ui_v2.css") }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset("css/responsive.css") }}" rel="stylesheet" type="text/css" />
 
         <!-- custom javascript -->
@@ -66,8 +66,8 @@
                         <nav class="list-group">
                             <a class="list-group-item {{ \Route::current()->getName() == 'user.overview' ? 'active' : '' }}" href="{{ route('user.overview') }}"> Account overview  </a>
                             <a class="list-group-item {{ \Route::current()->getName() == 'user.address' ? 'active' : '' }}" href="{{ route('user.address') }}"> My Address </a>
-                            <a class="list-group-item" href="{{ route('user.orders') }}"> My Orders </a>
-                            <a class="list-group-item" href="page-profile-setting.html"> Settings </a>
+                            <a class="list-group-item {{ \Route::current()->getName() == 'user.orders' ? 'active' : '' }}" href="{{ route('user.orders') }}"> My Orders </a>
+                            <a class="list-group-item" href="#"> Settings </a>
                             <a class="list-group-item" href="page-index-1.html"> Log out </a>
                         </nav>
                     </aside> <!-- col.// -->

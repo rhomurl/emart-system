@@ -42,7 +42,7 @@ class ProductDetails extends Component
             ->where('category_id', $product->category_id)
             ->whereNotIn('id', $productId)
             ->inRandomOrder()
-            ->limit(5)
+            ->limit(8)
             ->get();
 
         return view('livewire.shop.product-details', compact('product', 'related_products'))
@@ -70,6 +70,8 @@ class ProductDetails extends Component
         $this->emit('updateCart');
 
         session()->flash('message', 'Product Added to Cart');
+        return redirect(route('cart'));
+        
     }
 
     public function minusQty(){

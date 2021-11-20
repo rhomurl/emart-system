@@ -20,9 +20,8 @@ class CreateAddressBook extends Migration
             $table->string('entry_firstname', 32);
             $table->string('entry_lastname', 32);
             $table->string('entry_street_address', 64);
-            $table->foreignId('barangay_id')->constrained('users');
-            $table->string('entry_phonenumber', 16);  
-            $table->string('entry_postcode', 10);          
+            $table->foreignId('barangay_id')->constrained('barangays');
+            $table->string('entry_phonenumber', 16);     
             $table->timestamps();
         });
     }

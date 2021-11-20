@@ -11,21 +11,22 @@
   <div class="row">
     
 
-    @foreach ($addresses as $address)
+    @forelse ($addresses as $address)
           <div class="col-md-6">
               <article class="box mb-4">
                   <h6>{{ $address->entry_firstname }} {{ $address->entry_lastname }}</h6>
-                  <p>{{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}<br>{{ $address->entry_phonenumber }}  </p>
+                  <p>{{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}  </p>
                   <input wire:model="address_book_id" value="{{ $address->id }}" type="radio" name="address">
               </article>
           </div>  <!-- col.// -->
-          
-      @endforeach
-      @error('address_book_id')
-        <span class="text-danger">
-            {{ $message }}
-        </span>
-      @enderror
+    @empty
+      <a href="{{ route('user.address.create')}}" class="btn btn-light mb-3"> <i class="fa fa-plus"></i> Add new address </a>
+    @endforelse
+    @error('address_book_id')
+      <span class="text-danger">
+          {{ $message }}
+      </span>
+    @enderror
 
   <main class="col-md-12">
         <h4 class="card-title mb-4">Products</h4>

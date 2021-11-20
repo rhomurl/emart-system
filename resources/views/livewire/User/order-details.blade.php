@@ -1,34 +1,41 @@
 @section('title', 'Order Details')
 <div>
-    <a href="{{ route('user.orders') }}" class="btn btn-primary"> <i class="fa fa-chevron-left"></i> Back to My Orders</a>
+    <a href="{{ route('user.orders') }}" class="btn btn-primary"> <i class="fa fa-chevron-left"></i> Back to My Orders</a><br><br>
+
+    
     <article class="card mb-4">
         <header class="card-header">
             <strong class="d-inline-block mr-3">Order ID: {{ $order->id }}</strong>
-            <span class="float-right">Order Date: {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('MMM Do YYYY')}}</span>
+            <span class="float-right">Order Date and Time: {{ \Carbon\Carbon::parse($order->created_at)->format('F j Y h:i A')}}</span>
         </header>
         <div class="card-body">
-            <div class="row"> 
-                {{--<div class="col-md-8">
-                    <h6 class="text-muted">Delivery to</h6>
-                    <p>Michael Jackson <br>  
-                    Phone +1234567890 Email: myname@gmail.com <br>
-                    Location: Home number, Building name, Street 123, <br> 
-                    P.O. Box: 100123
-                    </p>
-                </div>--}}
+            <div class="tracking-wrap">
+                <div class="step {{ $order->status == 'ordered' ? 'active' : 'active' }}">
+                    <span class="icon"> <i class="fa fa-check"></i> </span>
+                    <span class="text">Order Placed</span>
+                </div> <!-- step.// -->
+                <div class="step {{ $order->status == 'ordered' ? '' : $order->status == 'processing' ? 'active' : $order->status == 'otw' ? 'active' : $order->status == 'delivered' ? 'active' : ''  }}">
+                    <span class="icon"> <i class="fa fa-user"></i> </span>
+                    <span class="text">Processing</span>
+                </div> <!-- step.// -->
+                <div class="step {{ $order->status == 'ordered' ? '' : $order->status == 'processing' ? '' : $order->status == 'otw' ? 'active' : $order->status == 'delivered' ? 'active' : ''  }}">
+                    <span class="icon"> <i class="fa fa-truck"></i> </span>
+                    <span class="text">On the way</span>
+                </div> <!-- step.// -->
+                <div class="step {{ $order->status == 'ordered' ? '' : $order->status == 'processing' ? '' : $order->status == 'otw' ? '' : $order->status == 'delivered' ? 'active' : ''  }}">
+                    <span class="icon"> <i class="fa fa-box"></i> </span>
+                    <span class="text">Delivered</span>
+                </div> <!-- step.// -->
+            </div><br>
 
-                <div class="card-body row no-gutters">
-                    {{--<div class="col">
-                        <strong>Delivery Estimate time:</strong> <br>16:40, 12 nov 2018
-                    </div>--}}
-                    <div class="col">
-                        <strong>Shipping company:</strong> <br> Default
-                    </div>
-                    <div class="col">
-                        <strong>Status:</strong> <br> {{ $order->status }}
-                    </div>
-                   
+            <div class="row"> 
+                <div class="col-md-8">
+                    <h6 class="text-muted">Delivery to</h6>
+                    <p>{{ $address->entry_firstname }} {{ $address->entry_lastname }} <br>  
+                        {{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}  
+                    </p>
                 </div>
+
                 
                 <div class="col-md-4">
                     <h6 class="text-muted">Payment</h6>
@@ -50,7 +57,7 @@
         </div> <!-- card-body .// -->
         
         <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover ml-5">
                 <tbody>
         <p class="p-2">Products</p>
             @foreach ($order->orderProduct as $item)

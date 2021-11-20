@@ -1,12 +1,13 @@
 <section class="section-content padding-y">
     <div class="container">
-        <!-- =============== SECTION REGION =============== 
-        <section class="padding-bottom">
+        <!-- =============== SECTION REGION =============== -->
+        <section class="padding-left">
         
             <header class="section-heading heading-line">
-                <h4 class="title-section text-uppercase">Choose location</h4>
+                <h4 class="title-section text-uppercase">We only deliver in the following areas</h4>
             </header>
-            
+            <h3>Cuenca, Balete, Batangas City, and San Jose</h2>
+            {{--
             <ul class="row mt-4">
                 <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="images/icons/flags/CN.png"> <span>China</span> </a></li>
                 <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="images/icons/flags/DE.png"> <span>Germany</span> </a></li>
@@ -17,8 +18,8 @@
                 <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="images/icons/flags/TR.png"> <span>Turkey</span> </a></li>
                 <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="images/icons/flags/UZ.png"> <span>Uzbekistan</span> </a></li>
                 <li class="col-md col-6"><a href="#" class="icontext"> <i class="mr-3 fa fa-ellipsis-h"></i> <span>More regions</span> </a></li>
-            </ul>
-            </section>-->
+            </ul>--}}
+            </section>
             <!-- =============== SECTION REGION .//END =============== -->
 
 
@@ -84,25 +85,28 @@
                     <h6 class="bg-blue text-center text-white mb-0 p-2">Popular category</h6>
                     
                     <div class="card-banner border-bottom">
-                    <div class="py-3" style="width:80%">
-                        <h6 class="card-title">Category</h6>
-                        <a href="#" class="btn btn-secondary btn-sm"> Source now </a>
+                    <div class="py-5" style="width:80%">
+                        <a href="#" class="btn btn-secondary btn"> Hygiene </a>
+                        {{--<h6 class="card-title">Category</h6>
+                        <a href="#" class="btn btn-secondary btn-sm"> Source now </a>--}}
                     </div> 
                     <img src="images/items/1.jpg" height="80" class="img-bg">
                     </div>
         
                     <div class="card-banner border-bottom">
-                    <div class="py-3" style="width:80%">
-                        <h6 class="card-title">Category 2</h6>
-                        <a href="#" class="btn btn-secondary btn-sm"> Source now </a>
+                    <div class="py-5" style="width:80%">
+                        <a href="#" class="btn btn-secondary btn"> Frozen Foods </a>
+                        {{--<h6 class="card-title">Category 2</h6>
+                        <a href="#" class="btn btn-secondary btn-sm"> Source now </a>--}}
                     </div> 
                     <img src="images/items/2.jpg" height="80" class="img-bg">
                     </div>
         
                     <div class="card-banner border-bottom">
                     <div class="py-3" style="width:80%">
-                        <h6 class="card-title">Category 3</h6>
-                        <a href="#" class="btn btn-secondary btn-sm"> Source now </a>
+                        <a href="#" class="btn btn-secondary btn"> Meat </a>
+                      {{--  <h6 class="card-title">Category 3</h6>--}}
+                        
                     </div> 
                     <img src="images/items/6.jpg" height="80" class="img-bg">
                     </div>

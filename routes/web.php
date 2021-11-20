@@ -1,11 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+
+use App\Http\Controllers\TestOrderController;
 use App\Http\Livewire\HomeComponent;
 
 use App\Http\Livewire\Admin;
 use App\Http\Livewire\User;
 use App\Http\Livewire\Shop;
+
+use App\Mail\OrderMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +27,7 @@ Route::get('/', HomeComponent::class)->name('user_home');
 Route::get('redirects', 'App\Http\Controllers\AuthRedirect@index')->middleware('verified');
 
 //Shop Routes
+Route::get('/search/{sdata}', Shop\SearchResult::class)->name('shop.searchresult');
 Route::get('/product/{slug}', Shop\ProductDetails::class)->name('product.details');
 Route::get('/categories', Shop\CategoryPage::class)->name('categorylist');
 Route::get('/cart', Shop\ShoppingCart::class)->name('cart');

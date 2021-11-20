@@ -20,8 +20,8 @@ class OrderDetails extends Component
     {
         $order = Order::findorFail($this->order_id);
     
-        //$address = AddressBook::where('id', $order->address_book_id)->get();
+        $address = AddressBook::with('barangay.city')->where('id', $order->address_book_id)->first();
         
-        return view('livewire.user.order-details', compact('order'))->layout('layouts.user-profile');
+        return view('livewire.user.order-details', compact('order', 'address'))->layout('layouts.user-profile');
     }
 }

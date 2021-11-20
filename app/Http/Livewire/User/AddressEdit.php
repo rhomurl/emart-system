@@ -46,45 +46,35 @@ class AddressEdit extends Component
 
     public function storeAddress()
     {
-        $this->validate([
-            'entry_company' => 'required|string|max:255',
-            'entry_firstname' => 'required|string|max:255',
-            'entry_lastname' => 'required|string|max:255',
-            'entry_street_address' => 'required|max:255',
-            'entry_phonenumber' => 'required|max:15',
-            'entry_postcode' => 'required|string|max:5',
-        ]);
+        try 
+        {
+            $this->validate([
+                'entry_company' => 'required|string|max:255',
+                'entry_firstname' => 'required|string|max:255',
+                'entry_lastname' => 'required|string|max:255',
+                'entry_street_address' => 'required|max:255',
+                'entry_phonenumber' => 'required|max:15'
+            ]);
 
-        AddressBook::create([
-            'user_id' => Auth::user()->id,
-            'entry_company' => $this->entry_company,
-            'entry_firstname' => $this->entry_firstname,
-            'entry_lastname' => $this->entry_lastname,
-            'entry_street_address' => $this->entry_street_address,
-            'barangay_id' => $this->barangay,
-            'entry_phonenumber' => $this->entry_phonenumber,
-            'entry_postcode' => $this->entry_postcode,
-        ]);
-
-        $this->entry_company = '';
-        $this->entry_firstname = '';
-        $this->entry_lastname = '';
-        $this->entry_street_address = '';
-        $this->entry_phonenumber = '';
-        $this->entry_postcode = '';
-
-        $this->cities = collect();
+            AddressBook::updateOrCreate(['id' => $this->address_id],
+                ['entry_company' => $this->entry_company,
+                'entry_firstname' => $this->entry_firstname,
+                'entry_lastname' => $this->entry_lastname,
+                'entry_street_address' => $this->entry_street_address,
+                'barangay_id' => $this->barangay,
+                'entry_phonenumber' => $this->entry_phonenumber
+                ]);
+            
+                session()->flash('message', 'Address Edited Successfully');
+                return redirect(route('user.address'));
+        } catch (\Exception $exception){
+            $this->error_message = "Something went wrong";
+        }
     }
 
     public function render()
     {
-        $addresses = AddressBook::with('barangay.city')
-            ->where('user_id', Auth::id())
-            ->latest()
-            ->take(5)
-            ->get();
 
-
-        return view('livewire.user.address-edit', compact('addresses'))->layout('layouts.user-profile');
+        return view('livewire.user.address-edit')->layout('layouts.user-profile');
     }
 }

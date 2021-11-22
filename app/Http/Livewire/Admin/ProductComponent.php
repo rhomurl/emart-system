@@ -20,12 +20,13 @@ class ProductComponent extends Component
 
     public $isOpen = 0;
     public $search = "";
+    public $pagenum = 10;
 
     public function render()
     {
         $products = Product::where('name', 'like', '%'.$this->search.'%')
         ->orwhere('selling_price', 'like', '%'.$this->search.'%')
-        ->orwhere('description', 'like', '%'.$this->search.'%')->paginate(5);
+        ->orwhere('description', 'like', '%'.$this->search.'%')->paginate($this->pagenum);
 
         return view('livewire.admin.product-component', compact('products'))->layout('layouts.admin');
     }

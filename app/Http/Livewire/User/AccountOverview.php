@@ -11,10 +11,17 @@ class AccountOverview extends Component
 {
     public function render()
     {
-        $ordercount = Order::where('user_id', Auth::id())->count();
-        $orderedcount = Order::where('user_id', Auth::id())
-        ->where('status', 'ordered')
+        $orders = Order::where('user_id', Auth::id())->limit(3)->latest()->get();
+        $order_count = Order::where('user_id', Auth::id())->count();
+        $pro_orders = Order::where('user_id', Auth::id())
+        ->where('status', 'processing')
         ->count();
-        return view('livewire.user.account-overview', compact('ordercount', 'orderedcount'))->layout('layouts.user-profile');
+        $shpd_orders = Order::where('user_id', Auth::id())
+        ->where('status', 'otw')
+        ->count();
+        $deliveredorders = Order::where('user_id', Auth::id())
+        ->where('status', 'delivered')
+        ->count();
+        return view('livewire.user.account-overview', compact('orders', 'order_count', 'pro_orders', 'shpd_orders', 'deliveredorders'))->layout('layouts.user-profile');
     }
 }

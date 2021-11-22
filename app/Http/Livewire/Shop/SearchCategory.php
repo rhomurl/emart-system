@@ -5,31 +5,36 @@ namespace App\Http\Livewire\Shop;
 use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class SearchResult extends Component
+class SearchCategory extends Component
 {
     use WithPagination;
 
-    public $sdata;
+    public $slug;
     public $perpage;
+    public $catname;
 
-    public function mount($sdata){
-         $this->sdata = str_replace("+", " ", $sdata);
+    public function mount($slug)
+    {
+        $this->slug = $slug;
     }
 
     public function render()
     {
-        $results = Product::where('name', 'LIKE', '%' . $this->sdata . '%')
-            ->orWhere('slug','like','LIKE', "%{$this->sdata}%")
+       $category_id = Category::select('id')->where('slug', '=', $this->slug)->firstOrFail();
+       $this->catname = Category::select('name')->where('slug', '=', $this->slug)->firstOrFail();
+ 
+       //dd($category_id);
+       $results = Product::where('category_id', $category_id->id) 
             ->paginate($this->perpage);
         
-        $resultCount = Product::where('name', 'LIKE', '%' . $this->sdata . '%')
-            ->orWhere('slug','like','LIKE', "%{$this->sdata}%")
+        $resultCount = Product::where('category_id', $category_id->id)
             ->count();
 
-        return view('livewire.shop.search-result', compact('results', 'resultCount'))->layout('layouts.user');
+        return view('livewire.shop.search-category', compact('results', 'resultCount'))->layout('layouts.user');
     }
 
     public function addToCart($productId)

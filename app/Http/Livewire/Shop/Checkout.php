@@ -22,7 +22,7 @@ use Livewire\Component;
 
 class Checkout extends Component
 {
-    public $address_book_id, $payment_mode, $checkout_message;
+    public $address_book_id, $payment_mode, $checkout_message, $shipping;
     
     public function render()
     {
@@ -31,6 +31,31 @@ class Checkout extends Component
         ->latest()
         ->take(5)
         ->get();
+
+        $old_cartItems = Cart::with('products')->get()->where('user_id', Auth::id())
+            ->map(function (Cart $items) {
+                return (object)[
+                    'id' => $items->product_id,
+                    'user_id'=> $items->user_id,
+                    'slug' => $items->products->slug,
+                    'name' => $items->products->name,
+                    'brand' => $items->products->brand->name,
+                    'image' => $items->products->image,
+                    'selling_price' => $items->products->selling_price,
+                    'qty' => $items->qty,
+                    'total' => ($items->qty * $items->products->selling_price),
+                ];
+            } 
+        );
+
+        foreach($old_cartItems as $item)
+        {
+            if(!Product::where('id', $item->id)->where('quantity', '>=', $item->qty)->exists())
+            {
+                $removeItem = Cart::where('user_id', Auth::id())->where('product_id', $item->id)->first();
+                $removeItem->delete();
+            }
+        }
 
         $cartItems = Cart::with('products')->get()->where('user_id', Auth::id())
             ->map(function (Cart $items) {
@@ -47,6 +72,21 @@ class Checkout extends Component
                 ];
             } 
         );
+
+        $this->totalCart = $cartItems->sum('total');
+        if($this->totalCart > 5000){
+            $this->shipping = 0;
+        }
+        else{
+            $this->shipping = 50;
+        }
+        
+        $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
+        $this->taxRate = $this->totalCartWithoutTax * 0.12;
+        $this->totalWithTax = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12);
+
+        
+
 
 
         return view('livewire.shop.checkout', compact('addresses', 'cartItems'))->layout('layouts.user');
@@ -76,10 +116,10 @@ class Checkout extends Component
                 $order = Order::create([
                     'user_id' => auth()->id(),
                     'address_book_id' => $this->address_book_id/1,
-                    'subtotal' => session()->get('checkout')['subtotal'],
-                    'shippingfee' => session()->get('checkout')['shipping'],
-                    'tax' => session()->get('checkout')['tax'],
-                    'total' => session()->get('checkout')['total'],
+                    'subtotal' => $this->totalCart,
+                    'shippingfee' => $this->shipping,
+                    'tax' => $this->taxRate,
+                    'total' => $this->totalWithTax,
                     'status' => 'ordered'
                 ]);
 
@@ -112,12 +152,10 @@ class Checkout extends Component
                 $orderData = [
                     'greeting' => 'Thank you for your order!',
                     'name' => 'Hello ' . $user->firstname . ',',
-                    'body' => ' Thank you for your order from Allena Mindoro.',
+                    'body' => ' Thank you for your order from Allena Mindoro. We received your order #' . $order->id . ' on ' . $order->created_at->format('F j Y h:i A') . ' and your payment method is Cash on Delivery. We will email you once your order has been shipped. We wish you enjoy shopping with us and thank you again for choosing our store!' ,
                     'orderText' => 'View Order',
                     'orderDetails' => [
                         'id' => $order->id,
-                        'total' => $order->total,
-                        'time' => $order->created_at->format('F j Y h:i A'),
                     ],
                     'url' => url(route('user.order.details', $order->id )),
                     'thankyou' => ''
@@ -128,7 +166,8 @@ class Checkout extends Component
                 return redirect(route('checkout.success'));
             });
         } catch (\Exception $exception){
-            $this->checkout_message = "Something wrong" . $exception;
+            //$this->checkout_message = "Something wrong" . $exception;
+            dd($exception->getMessage());
         }
 
 

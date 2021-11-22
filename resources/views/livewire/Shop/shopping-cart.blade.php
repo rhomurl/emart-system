@@ -8,6 +8,10 @@
                 {{ session()->get('message') }}
             </div>
         @endif
+
+        @if($this->checkout_message)
+            {{ $this->checkout_message }}
+        @endif
     <div class="card">
         
         <table class="table table-borderless table-shopping-cart">
@@ -15,7 +19,7 @@
         @if(!$cartItems->count() == 0)
             <tr class="small text-uppercase">
             <th scope="col">Product</th>
-            <th scope="col" width="120">Quantity</th>
+            <th scope="col" width="150">Quantity</th>
             <th scope="col" width="120">Price</th>
             <th scope="col" class="text-right" width="200"> </th>
             </tr>
@@ -38,10 +42,15 @@
                     </figure>
                 </td>
                 <td> 
+                    
                     <div class="form-inline">
+                        @if($cartItem->quantity > $cartItem->qty)
                         <button wire:click.prevent="decreaseQuantity({{ $cartItem->id }}, {{$cartItem->qty }})" type="submit" class="btn btn-sm btn-light mr-2">-</button>
                             {{ $cartItem->qty }}
                         <button wire:click.prevent="increaseQuantity({{ $cartItem->id }})" type="submit" class="btn btn-sm btn-light ml-2">+</button>
+                        @else
+                            Out of stock
+                        @endif
                     </div>
                 </td>
                 <td> 
@@ -80,15 +89,11 @@
                 <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">PHP {{ $totalCart }}.00</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Discount:</dt>
-                            <dd class="text-right">PHP 0.00</dd>
+                            <dd class="text-right">₱ {{ $totalCart }}.00</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-right  h5"><strong>PHP {{ $totalCart }}.00</strong></dd>
+                            <dd class="text-right  h5"><strong>₱ {{ $totalCart }}.00</strong></dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">

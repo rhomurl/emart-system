@@ -34,15 +34,20 @@
                     <h6 class="title-category">MY MARKETS <i class="d-md-none icon fa fa-chevron-down"></i></h6>
                     <ul class="menu-category">
                         @foreach ($categories as $category)
-                            <li><a href="#">{{ $category->name }}</a></li>
+                            <li><a href="{{ route('shop.searchcategory', $category->slug) }}">{{ $category->name }}</a></li>
+                            @if($category->id == '8')
+                                @break
+                            @endif
                         @endforeach
                         
-                        <li class="has-submenu"><a href="#">More items</a>
+                        <li class="has-submenu"><a href="#">More categories</a>
                             <ul class="submenu">
-                                <li><a href="#">Items 1</a></li>
-                                <li><a href="#">Items 2</a></li>
-                                <li><a href="#">Items 3</a></li>
-                                <li><a href="#">Items 4</a></li>
+                            @foreach ($categories as $category)    
+                                @if($category->id > '7')
+                                    <li><a href="{{ route('shop.searchcategory', $category->slug) }}">{{ $category->name }}</a></li>
+                                    @continue
+                                @endif
+                             @endforeach 
                             </ul>
                         </li>
                     </ul>
@@ -82,15 +87,17 @@
             </div> <!-- col.// -->
             <div class="col-md d-none d-lg-block flex-grow-1">
                 <aside class="special-home-right">
-                    <h6 class="bg-blue text-center text-white mb-0 p-2">Popular category</h6>
+                    <h6 class="bg-blue text-center text-white mb-0 p-2">Featured category</h6>
                     
                     <div class="card-banner border-bottom">
                     <div class="py-5" style="width:80%">
-                        <a href="#" class="btn btn-secondary btn"> Hygiene </a>
+                        <a href="#" class="btn btn-secondary btn"> Instant Noodles </a>
                         {{--<h6 class="card-title">Category</h6>
                         <a href="#" class="btn btn-secondary btn-sm"> Source now </a>--}}
                     </div> 
-                    <img src="images/items/1.jpg" height="80" class="img-bg">
+                    <a href="{{ route('shop.searchcategory', 'lnstant-noodles') }}">
+                        <img src="storage/images/products/lm-pancit.c-chili-mansi-png.png" height="80" class="img-bg">
+                    </a>
                     </div>
         
                     <div class="card-banner border-bottom">
@@ -99,16 +106,20 @@
                         {{--<h6 class="card-title">Category 2</h6>
                         <a href="#" class="btn btn-secondary btn-sm"> Source now </a>--}}
                     </div> 
-                    <img src="images/items/2.jpg" height="80" class="img-bg">
+                    <a href="{{ route('shop.searchcategory', 'frozen-foods') }}">
+                        <img src="images/items/2.jpg" height="80" class="img-bg">
+                    </a>
                     </div>
         
                     <div class="card-banner border-bottom">
                     <div class="py-3" style="width:80%">
-                        <a href="#" class="btn btn-secondary btn"> Meat </a>
+                        <a href="#" class="btn btn-secondary btn"> Fish and Meat </a>
                       {{--  <h6 class="card-title">Category 3</h6>--}}
                         
                     </div> 
-                    <img src="images/items/6.jpg" height="80" class="img-bg">
+                    <a href="{{ route('shop.searchcategory', 'fish-and-meat') }}">
+                        <img src="images/items/6.jpg" height="80" class="img-bg">
+                    </a>
                     </div>
         
                 </aside>
@@ -138,7 +149,7 @@
                         <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
                         <figcaption class="info-wrap">
                             <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
-                            <div class="price mt-1">PHP {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                            <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->
                             <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
                                 Add to cart</a>
                         </figcaption>
@@ -152,7 +163,7 @@
                     <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
                     <figcaption class="info-wrap">
                         <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
-                        <div class="price mt-1">PHP {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                        <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->
                         <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
                             Add to cart</a>
                     </figcaption>

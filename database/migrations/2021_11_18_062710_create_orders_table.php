@@ -15,8 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
-            $table->string('address_book_id')->index();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('address_book_id')->constrained('address_book');
             $table->double('subtotal', 8, 2);
             $table->double('shippingfee', 5, 2)->nullable();
             $table->double('tax', 6, 2);

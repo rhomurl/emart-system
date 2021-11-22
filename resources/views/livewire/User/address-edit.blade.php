@@ -5,9 +5,9 @@
     
     <div class="card mb-4">
         @if ($this->error_message)
-        <div class="alert alert-warning" role="alert">
-            {{ $this->error_message }}
-        </div>
+            <div class="alert alert-warning" role="alert">
+                {{ $this->error_message }}
+            </div>
         @endif
         <div class="col md-3 p-3">
             <a href="{{ route('user.address') }}" class="btn btn-primary float-md-left"><i class="fa fa-chevron-left"></i> Back to My Address </a>

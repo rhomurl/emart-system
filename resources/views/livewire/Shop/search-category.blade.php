@@ -6,8 +6,8 @@
         <div class="card-body">
             <ol class="breadcrumb float-left">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Search Results</a></li>
-                <li class="breadcrumb-item active">{{ $this->sdata }}</li>
+                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                <li class="breadcrumb-item active">{{ $this->catname->name }}</li>
             </ol>
         </div> <!-- card-body .// -->
     </div> <!-- card.// -->

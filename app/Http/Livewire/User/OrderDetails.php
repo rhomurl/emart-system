@@ -18,6 +18,8 @@ class OrderDetails extends Component
 
     public function render()
     {
+        $status = 0;
+
         $order = Order::findorFail($this->order_id);
     
         $address = AddressBook::with('barangay.city')->where('id', $order->address_book_id)->first();

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\TestOrderController;
 use App\Http\Livewire\HomeComponent;
-
+use App\Http\Controllers\ChartJsController;
 use App\Http\Livewire\Admin;
 use App\Http\Livewire\User;
 use App\Http\Livewire\Shop;
@@ -22,12 +22,13 @@ use App\Mail\OrderMail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('chart-js', [ChartJsController::class, 'index']);
 Route::get('/', HomeComponent::class)->name('user_home');
 Route::get('redirects', 'App\Http\Controllers\AuthRedirect@index')->middleware('verified');
 
 //Shop Routes
 Route::get('/search/{sdata}', Shop\SearchResult::class)->name('shop.searchresult');
+Route::get('/category/{slug}', Shop\SearchCategory::class)->name('shop.searchcategory');
 Route::get('/product/{slug}', Shop\ProductDetails::class)->name('product.details');
 Route::get('/categories', Shop\CategoryPage::class)->name('categorylist');
 Route::get('/cart', Shop\ShoppingCart::class)->name('cart');
@@ -50,6 +51,7 @@ Route::name('admin.')->prefix('admin')->middleware(['check_if_admin'])->group(fu
     Route::get('categories', Admin\CategoryComponent::class)->name('categories');
     Route::get('usermanagement', Admin\UserManagement::class)->name('manageuser');
     Route::get('orders', Admin\UserOrders::class)->name('orders');
+    Route::get('/order/{order_id}', Admin\OrderDetails::class)->name('order.details');
 }); 
 
 Route::middleware(['auth:sanctum', 'verified', 'check_if_admin'])->get('/dashboard', function () {

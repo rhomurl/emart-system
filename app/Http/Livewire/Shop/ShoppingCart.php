@@ -33,11 +33,13 @@ class ShoppingCart extends Component
                     'name' => $items->products->name,
                     'brand' => $items->products->brand->name,
                     'image' => $items->products->image,
+                    'quantity' => $items->products->quantity,
                     'selling_price' => $items->products->selling_price,
                     'qty' => $items->qty,
                     'total' => ($items->qty * $items->products->selling_price),
                 ];
             } );
+        
 
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
         $this->taxRate = $this->totalCartWithoutTax * 0.12;
@@ -48,18 +50,25 @@ class ShoppingCart extends Component
         return view('livewire.shop.shopping-cart', compact('cartItems'))->layout('layouts.user');
     }
 
-    public function setAmountForCheckout(){       
+    public function setAmountForCheckout(){ 
+        
+        $cart = Cart::with('product')->where('user_id', Auth::id())->get();
+        $products = Product::select('id', 'quantity')
+            ->whereIn('id', $cart->pluck('product_id'))
+            ->pluck('quantity', 'id');
 
-         $cartTotal = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12) + 50;
-         session()->put('checkout', [
-             //'shipping' => $this->shipping,
-             'shipping' => '50',
-             'subtotal' => $this->totalCartWithoutTax,
-             'tax' => $this->taxRate,
-             'total' => $cartTotal,
-         ]);
- 
-         return redirect()->route('checkout');
+        foreach ($cart as $cartProduct){
+            if(!isset($products[$cartProduct->product_id]) 
+                || $products[$cartProduct->product_id] < $cartProduct->qty) {
+                $this->checkout_message = 'Error: Product ' . $cartProduct->product->name . ' not found in stock';
+            }
+
+            $cartTotal = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12) + 50;
+            return redirect()->route('checkout');
+        }
+
+       
+
     }
 
     public function increaseQuantity($id)

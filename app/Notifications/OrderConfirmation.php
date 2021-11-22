@@ -44,7 +44,7 @@ class OrderConfirmation extends Notification
                     ->subject('Order #' . $this->orderData['orderDetails']['id'])
                     ->greeting($this->orderData['greeting'])
                     ->line($this->orderData['name'])
-                    ->line($this->orderData['body'] . ' We received your order #' . $this->orderData['orderDetails']['id'] . ' on ' . $this->orderData['orderDetails']['time'] . ' and your payment method is Cash on Delivery. We will email you once your order has been shipped. We wish you enjoy shopping with us and thank you again for choosing our store!')
+                    ->line($this->orderData['body'])
                     ->action($this->orderData['orderText'], $this->orderData['url']);
                     //->line($this->orderData['thankyou']);
     }

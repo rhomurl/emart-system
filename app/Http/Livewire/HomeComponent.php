@@ -16,7 +16,7 @@ class HomeComponent extends Component
 
     public function render()
     {
-        $categories = Category::limit(7)->get();
+        $categories = Category::get();
 
         $products = Product::where('quantity', '>', 0)
             ->limit(6)

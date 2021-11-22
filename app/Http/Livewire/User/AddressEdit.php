@@ -14,7 +14,7 @@ class AddressEdit extends Component
     public $cities;
 
     public $entry_company, $entry_firstname, $entry_lastname, $entry_street_address, $entry_phonenumber, $entry_postcode;
-
+    public $error_message;
     public $barangay;
     public $city;
 

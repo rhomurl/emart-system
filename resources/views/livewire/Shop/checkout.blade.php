@@ -108,28 +108,27 @@
   <div class="card mb-4">
     <div class="card-body">
     <h4 class="card-title mb-4">Order Total</h4>
-      @if(Session::has('checkout'))
+      
         
-      <span class="text-xl">Subtotal:</span><span class="text-xl"> PHP {{ Session::get('checkout')['subtotal'] }}</span><br>
+      <span class="text-xl">Subtotal:</span><span class="text-xl"> ₱ {{ $this->totalCart }}</span><br>
     
-      <span class="text-xl">Delivery fee:</span> <span class="text-xl"> PHP {{ Session::get('checkout')['shipping'] }}<br>
+      <span class="text-xl">Delivery fee:</span> <span class="text-xl"> ₱ {{ $this->shipping }}<br>
     
-      <span class="text-xl">Incl. Tax:</span> <span class="text-xl"> PHP {{ Session::get('checkout')['tax'] }}</span><br>
+      <span class="text-xl">Incl. Tax:</span> <span class="text-xl"> ₱ {{ $this->taxRate }}</span><br>
     
       
       
-      <span class="font-bold text-xl">Grand Total:</span> <span class="text-xl">₱{{ Session::get('checkout')['total'] }}</span>
+      <span class="font-bold text-xl">Grand Total:</span> <span class="text-xl">₱ {{ $this->totalWithTax }} </span>
       <br><br>
-      @endif
-    </div> <!-- card-body.// -->
+      
+    </div> 
   </div>
   
   
   <button class="btn btn-primary float-md-right"> Place Order <i class="fa fa-chevron-right"></i> </button>
-  </main> <!-- col.// -->
-
+  </main>
   </div>
-</div> <!-- container .//  -->
+</div>
 
 
     <br><br> 

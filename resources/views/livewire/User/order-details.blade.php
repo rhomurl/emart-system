@@ -32,6 +32,7 @@
                 <div class="col-md-8">
                     <h6 class="text-muted">Delivery to</h6>
                     <p>{{ $address->entry_firstname }} {{ $address->entry_lastname }} <br>  
+                        {{ $address->entry_company }}<br>
                         {{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}  
                     </p>
                 </div>
@@ -42,15 +43,15 @@
                     <span class="text-success">
                         Cash on Delivery
                     </span>
-                    <p>Subtotal: PHP {{ $order->subtotal }} <br>
-                        Shipping fee: PHP 
+                    <p>Subtotal: ₱ {{ $order->subtotal }} <br>
+                        Shipping fee: ₱ 
                         @if(!$order->shippingfee)
                         0.00
                         @else
                             {{ $order->shippingfee }}
                         @endif <br> 
-                        Incl. Tax: PHP {{ $order->tax }} <br> 
-                        <span class="b">Total: PHP {{ $order->total }} </span>
+                        Incl. Tax: ₱ {{ $order->tax }} <br> 
+                        <span class="b">Total: ₱ {{ $order->total }} </span>
                     </p>
                 </div>
             </div> <!-- row.// -->
@@ -68,12 +69,13 @@
                         <div class="aside"><img src="{{ asset('storage') }}/{{ $item->product->image }}" class="img-sm border"></div>
                         <figcaption class="info align-self-center">
                             <p class="title">{{ $item->product->name}}</p>
-                            <span class="text-muted">PHP {{$item->price}} <br> Qty: {{$item->quantity}}</span>
+                            <span class="text-muted">₱ {{$item->price}} <br> Qty: {{$item->quantity}}</span>
                         </figcaption>
                     </figure> 
                 </li>
             </ul>
-        @endforeach
+
+            @endforeach
         </tbody></table>
         </div> <!-- table-responsive .end// -->
     </article>

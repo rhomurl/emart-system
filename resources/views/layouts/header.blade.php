@@ -160,31 +160,25 @@
         <div class="navbar-collapse collapse" id="main_nav4" style="">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link pl-0" href="#"> <strong>All category</strong></a>
+              <a class="nav-link" href="{{ route('shop.searchcategory', 'fruits-vegetables')}}">Fruits and Vegetables</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Fruits and Vegetables</a>
+              <a class="nav-link" href="{{ route('shop.searchcategory', 'canned-goods')}}">Canned Goods</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Canned Goods</a>
+              <a class="nav-link" href="{{ route('shop.searchcategory', 'rice')}}">Rice</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Frozen Foods</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Rice</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Biscuit and Crackers</a>
+              <a class="nav-link" href="{{ route('shop.searchcategory', 'dairy-products') }}">Dairy Products</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Foods and Drink</a>
+                <a class="dropdown-item" href="{{ route('shop.searchcategory', 'lnstant-noodles') }}">Instant Noodles</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Category 1</a>
-                <a class="dropdown-item" href="#">Category 2</a>
-                <a class="dropdown-item" href="#">Category 3</a>
+                
+                <a class="dropdown-item" href="{{ route('shop.searchcategory', 'hygiene') }}">Hygiene</a>
+                <a class="dropdown-item" href="{{ route('shop.searchcategory', 'fish-and-meat') }}">Fish and Meat</a>
               </div>
             </li>
           </ul>

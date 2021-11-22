@@ -47,7 +47,7 @@
     </div> rating-wrap.// -->
     
     <div class="mb-3"> 
-        <var class="price h4">PHP {{ $product->selling_price }}</var> 
+        <var class="price h4">₱ {{ $product->selling_price }}</var> 
         <!--<span class="text-muted">USD 562.65 incl. VAT</span> !-->
     </div> <!-- price-detail-wrap .// -->
     
@@ -56,7 +56,7 @@
       <dd class="col-sm-9"><a href="#">{{ $product->brand->name }}</a></dd>
     
       <dt class="col-sm-3">Availabilty</dt>
-      <dd class="col-sm-9">In Stock</dd>
+      <dd class="col-sm-9">{{ $product->quantity == '0' ? 'Out of Stock' : 'In Stock'}}</dd>
 
       <dt class="col-sm-3 mt-2">Quantity</dt>
       <dd class="col-sm-9">
@@ -80,17 +80,16 @@
         <div class="form-row">
             <div class="form-group col-md">
               @if ($product->quantity == 0)
-                <a href="#" class="btn btn-primary"> 
+                
               @else
                   @if(!$this->qty)
-                    <a wire:click.prevent="addToCart({{ $product->id }}, 1)" href="#" class="btn btn-primary"> 
+                    <a wire:click.prevent="addToCart({{ $product->id }}, 1)" href="#" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span></a>  
                   @else 
-                    <a wire:click.prevent="addToCart({{ $product->id }}, {{ $this->qty }})" href="#" class="btn btn-primary"> 
+                    <a wire:click.prevent="addToCart({{ $product->id }}, {{ $this->qty }})" href="#" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span></a> 
                   @endif
                 
               @endif
-                    <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span> 
-                </a>
+                    
             </div> <!-- col.// -->
         </div> <!-- row.// -->
     <hr>
@@ -174,7 +173,7 @@
               </div>
             <figcaption class="info align-self-center">
               <a href="{{ route('product.details', $related_product->slug ) }}" class="title">{{ $related_product->name }}</a>
-              <strong class="price">PHP {{ $related_product->selling_price }}</strong>
+              <strong class="price">₱ {{ $related_product->selling_price }}</strong>
             </figcaption>
           </figure>
         </div> <!-- col.// -->

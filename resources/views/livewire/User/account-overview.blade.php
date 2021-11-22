@@ -29,25 +29,25 @@
         <article class="card-group card-stat">
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">{{ $ordercount }}</h4>
+                        <h4 class="title">{{ $order_count }}</h4>
                     <span>Orders</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">{{ $orderedcount }}</h4>
+                        <h4 class="title">{{ $pro_orders }}</h4>
                     <span>Processing</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">0</h4>
+                        <h4 class="title">{{ $shpd_orders }}</h4>
                     <span>Shipped</span>
                 </div>
             </figure>
             <figure class="card bg">
                 <div class="p-3">
-                        <h4 class="title">0</h4>
+                        <h4 class="title">{{ $deliveredorders }}</h4>
                     <span>Delivered Orders</span>
                 </div>
             </figure>
@@ -62,36 +62,35 @@
         <h5 class="card-title mb-4">Recent orders </h5>	
 
         <div class="row">
-        <div class="col-md-6">
-            <figure class="itemside  mb-3">
-                <div class="aside"><img src="{{ asset('images/items/1.jpg') }}" class="border img-sm"></div>
-                <figcaption class="info">
-                    <time class="text-muted"><i class="fa fa-calendar-alt"></i> 01.01.2021</time>
-                    <p>Order 1</p>
-                    <span class="text-success">Delivered </span>
-                </figcaption>
-            </figure>
-        </div> <!-- col.// -->
-        <div class="col-md-6">
-            <figure class="itemside  mb-3">
-                <div class="aside"><img src="{{ asset('images/items/2.jpg') }}" class="border img-sm"></div>
-                <figcaption class="info">
-                    <time class="text-muted"><i class="fa fa-calendar-alt"></i> 12.09.2019</time>
-                    <p>Order 2</p>
-                    <span class="text-warning">Processing</span>
-                </figcaption>
-            </figure>
-        </div> <!-- col.// -->
-        <div class="col-md-6">
-            <figure class="itemside mb-3">
-                <div class="aside"><img src="{{ asset('images/items/3.jpg') }}" class="border img-sm"></div>
-                <figcaption class="info">
-                    <time class="text-muted"><i class="fa fa-calendar-alt"></i> 02.02.2021</time>
-                    <p> Order 3 </p>
-                    <span class="text-success">Shipped  </span>
-                </figcaption>
-            </figure>
-        </div> <!-- col.// -->
+        @forelse($orders as $order)
+            <div class="col-md-6">
+                <figure class="itemside  mb-3">
+                    <div class="aside">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                    </div>
+                    <figcaption class="info">
+                        <time class="text-muted"><i class="fa fa-calendar-alt"></i> {{ \Carbon\Carbon::parse($order->created_at)->format('F j, Y')}}</time>
+                        <p>Order #{{ $order->id }} - 
+                        <span class="text-success">
+                        @if($order->status == 'otw')
+                            On The Way
+                        @elseif($order->status == 'ordered')
+                            Ordered
+                        @elseif($order->status == 'delivered')
+                            Delivered
+                        @else
+                            {{ $order->status }} 
+                        @endif
+                        </span></p>
+                        
+                    </figcaption>
+                </figure>
+            </div> <!-- col.// -->
+        @empty
+            No recent orderes
+        @endforelse
     </div> <!-- row.// -->
 
     <a href="{{ route('user.orders') }}" class="btn btn-outline-primary btn-block"> See all orders <i class="fa fa-chevron-down"></i>  </a>

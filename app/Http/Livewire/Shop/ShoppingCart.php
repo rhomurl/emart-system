@@ -11,14 +11,9 @@ class ShoppingCart extends Component
 {
     protected $listeners = ['updateCart' => 'render', 'increaseQuantity' => 'addToCart'];
 
-    public $taxTotal;
-    public $taxRate = 0;
     public $shipping;
     public $totalCart;
     public $totalCartWithoutTax;
-    public $totalWithTax;
-    public $taxRt;
-    public $taxValue = 0;
     public $countries;
     public $checkout_message;
 
@@ -39,13 +34,18 @@ class ShoppingCart extends Component
                     'total' => ($items->qty * $items->products->selling_price),
                 ];
             } );
-        
-
-        $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
-        $this->taxRate = $this->totalCartWithoutTax * 0.12;
-        $this->totalWithTax = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12);
 
         $this->totalCart = $cartItems->sum('total');
+
+        if($this->totalCart > 2500 || $cartItems->count() == 0){
+            $this->shipping = 0;
+        }
+        else{
+            $this->shipping = 55;
+        }
+        $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
+        $this->grandTotal = $this->totalCartWithoutTax;
+        
 
         return view('livewire.shop.shopping-cart', compact('cartItems'))->layout('layouts.user');
     }
@@ -62,8 +62,6 @@ class ShoppingCart extends Component
                 || $products[$cartProduct->product_id] < $cartProduct->qty) {
                 $this->checkout_message = 'Error: Product ' . $cartProduct->product->name . ' not found in stock';
             }
-
-            $cartTotal = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12) + 50;
             return redirect()->route('checkout');
         }
 

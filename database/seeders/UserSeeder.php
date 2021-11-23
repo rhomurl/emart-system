@@ -51,5 +51,14 @@ class UserSeeder extends Seeder
             'contact_number' => '09104236698',
         ]);
         $user->assignRole($role3);
+
+        $user = \App\Models\User::factory()->create([
+            'firstname' => 'Ivan',
+            'lastname' => 'Dimayuga',
+            'email' => 'kyleivandimayuga20@gmail.com',
+            'password' => Hash::make('kyle123!'),
+            'contact_number' => '09550583958',
+        ]);
+        $user->assignRole($role1);
     }
 }

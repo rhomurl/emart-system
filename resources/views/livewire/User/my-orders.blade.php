@@ -45,7 +45,6 @@
                         @else
                             {{ $order->shippingfee }}
                         @endif <br> 
-                        Incl. Tax: ₱ {{ $order->tax }} <br> 
                         <span class="b">Total: ₱ {{ $order->total }} </span>
                     </p>
                 </div>

@@ -108,7 +108,7 @@
                     @endforelse
                 </tbody>
             </table>
-                {{ $users->links('vendor.pagination.custom') }}
+                {{ $users->links() }}
         </div>
     </div>
 </div>

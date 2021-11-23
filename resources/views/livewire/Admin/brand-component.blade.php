@@ -89,7 +89,7 @@
                 </tbody>
             </table>
             @if(!$isOpen)
-                {{ $brands->links('vendor.pagination.custom') }}
+                {{ $brands->links() }}
             @endif
         </div>
     </div>

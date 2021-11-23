@@ -133,7 +133,6 @@
                                         </svg>
                                     </button>
 
-                                    {{--
                                     <div x-data="{ confirmDelete:false }" class="flex flex-wrap -mx-2 overflow-hidden">
                                         <button x-show="!confirmDelete" x-on:click="confirmDelete=true" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 hover:bg-gray-200 focus:outline-none focus:shadow-outline-gray">
                                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -147,7 +146,7 @@
                                         <div class="my-2 px-2 w-1/2 overflow-hidden">
                                             <button x-show="confirmDelete" x-on:click="confirmDelete=false" class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">No</button>   
                                         </div>
-                                      </div>--}}
+                                      </div>
                                 </div>
                             </td>
                         </tr>
@@ -159,7 +158,7 @@
                 </tbody>
             </table>
             @if(!$isOpen)
-                {{ $products->links('vendor.pagination.custom') }}
+                {{ $products->links() }}
             @endif
         </div>
     </div>

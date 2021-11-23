@@ -23,7 +23,9 @@
             </h4>
             <p class="text-gray-600 dark:text-gray-400">
                 {{ $address->entry_firstname }} {{ $address->entry_lastname }}<br>
-                {{ $address->entry_company }} <br>
+                @if($address->entry_company)
+                    {{ $address->entry_company }}<br>
+                @endif
                 {{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}    
             </p>
 
@@ -41,7 +43,6 @@
             <p class="text-gray-600 dark:text-gray-400">
                 <b>Subtotal:</b> ₱ {{ $order->subtotal }}<br>
                 <b>Shipping subtotal:</b> ₱ {{ $order->shippingfee }} <br>
-                <b>Tax Incl.:</b> ₱ {{ $order->tax }}<br>
                 <b>Order Total:</b> ₱ {{ $order->total }}<br><br>
            
             Order Status:  
@@ -69,6 +70,7 @@
 
             @if($status)
                 <select wire:model="order_status" class="block w-sm mt-1 text-sm border rounded appearance-none dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                    <option value="" selected>-- select status --</option>
                     <option value="processing" {{ $order->status == 'processing' ? 'selected': '' }}>Processing</option>
                     <option value="otw" {{ $order->status == 'otw' ? 'selected': '' }}>On The Way</option>
                     <option value="delivered" {{ $order->status == 'delivered' ? 'selected': '' }}>Delivered</option>

@@ -39,7 +39,7 @@
           <div class="form-row">
             <div class="col form-group">
                 <label>Company</label>
-                  <input wire:model="entry_company" name="entry_company" type="text" class="form-control" value="" required>
+                  <input wire:model="entry_company" name="entry_company" type="text" class="form-control" value="">
                   @error('entry_company')
                         <span class="text-danger">
                             {{ $message }}

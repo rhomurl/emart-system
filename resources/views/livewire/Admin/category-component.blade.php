@@ -31,7 +31,7 @@
                 </tbody>
             </table>
             @if(!$isOpen)
-                {{ $categories->links('vendor.pagination.custom') }}
+                {{ $categories->links() }}
             @endif
         </div>
     </div>

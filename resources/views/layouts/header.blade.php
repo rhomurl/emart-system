@@ -160,6 +160,9 @@
         <div class="navbar-collapse collapse" id="main_nav4" style="">
           <ul class="navbar-nav">
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('shop.displayproducts')}}">All Products</a>
+              </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('shop.searchcategory', 'fruits-vegetables')}}">Fruits and Vegetables</a>
             </li>
             <li class="nav-item">

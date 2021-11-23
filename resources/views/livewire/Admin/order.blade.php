@@ -23,7 +23,19 @@
     </td>
 
     <td class="px-4 py-3">
-        <p class="font-semibold">{{ $order->status }}</p>
+        <p class="font-semibold">
+            @if($order->status == 'ordered')
+                Ordered
+            @elseif($order->status == 'delivered')
+                Delivered
+            @elseif($order->status == 'otw')
+                On The Way
+            @elseif($order->status == 'processing')
+                Processing    
+            @else
+                {{ $order->status }}
+            @endif
+        </p>
     </td>
 
     <td class="px-4 py-3">

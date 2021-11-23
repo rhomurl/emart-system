@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->foreignId('address_book_id')->constrained('address_book');
             $table->double('subtotal', 8, 2);
             $table->double('shippingfee', 5, 2)->nullable();
-            $table->double('tax', 6, 2);
             $table->double('total', 8, 2);
             $table->string('status');
             $table->timestamps();

@@ -29,18 +29,17 @@
     @enderror
 
   <main class="col-md-12">
-        <h4 class="card-title mb-4">Products</h4>
+        
   <div class="card">
-    
+    <h4 class="card-title ml-3 mt-3">Products</h4>
 
       <table class="table table-borderless table-shopping-cart">
       <thead class="text-muted">
       @if(!$cartItems->count() == 0)
           <tr class="small text-uppercase">
-          <th scope="col">Product</th>
+          <th scope="col" width="240">Product</th>
           <th scope="col" width="120">Quantity</th>
           <th scope="col" width="120">Price</th>
-          <th scope="col" class="text-right" width="200"> </th>
           </tr>
       @endif
       </thead>
@@ -77,14 +76,9 @@
 
       </tbody>
       </table>
-
-      
-
-  
-
-      
   </div> <!-- card.// -->
-  <div class="card mb-4">
+  
+  <div class="card mt-4 mb-4">
     <div class="card-body">
     <h4 class="card-title mb-4">Payment Method</h4>
     <form role="form" style="max-width:380px;">
@@ -114,11 +108,7 @@
     
       <span class="text-xl">Delivery fee:</span> <span class="text-xl"> ₱ {{ $this->shipping }}<br>
     
-      <span class="text-xl">Incl. Tax:</span> <span class="text-xl"> ₱ {{ $this->taxRate }}</span><br>
-    
-      
-      
-      <span class="font-bold text-xl">Grand Total:</span> <span class="text-xl">₱ {{ $this->totalWithTax }} </span>
+      <span class="font-bold text-xl">Grand Total:</span> <span class="text-xl">₱ {{ $this->grandTotal }} </span>
       <br><br>
       
     </div> 

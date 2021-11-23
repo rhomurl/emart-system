@@ -89,7 +89,6 @@
 		<section class="footer-copyright border-top">
 				<p target="_blank" class="float-right text-muted">
 					<a href="#">Privacy &amp; Cookies</a> &nbsp;   &nbsp; 
-					<a href="#">Accessibility</a>
 				</p>
 				<p class="text-muted"> © 2021 Alena Mindoro • All rights reserved </p>
 				

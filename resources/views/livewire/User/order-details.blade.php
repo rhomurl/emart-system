@@ -32,7 +32,9 @@
                 <div class="col-md-8">
                     <h6 class="text-muted">Delivery to</h6>
                     <p>{{ $address->entry_firstname }} {{ $address->entry_lastname }} <br>  
-                        {{ $address->entry_company }}<br>
+                        @if($address->entry_company)
+                            {{ $address->entry_company }}<br>
+                        @endif
                         {{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}  
                     </p>
                 </div>
@@ -50,7 +52,6 @@
                         @else
                             {{ $order->shippingfee }}
                         @endif <br> 
-                        Incl. Tax: ₱ {{ $order->tax }} <br> 
                         <span class="b">Total: ₱ {{ $order->total }} </span>
                     </p>
                 </div>

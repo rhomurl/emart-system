@@ -54,7 +54,8 @@
             </div>  <!-- category-wrap.// -->
         </div> <!-- col.// -->
         
-        <livewire:shop.product-search/>
+        @livewire('shop.product-search')
+
 
         <div class="col-lg-3 col-sm-12 col-md-12 col-12">
             <div class="widgets-wrap float-md-right">

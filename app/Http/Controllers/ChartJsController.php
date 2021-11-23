@@ -31,6 +31,6 @@ class ChartJsController extends Controller
     }
 
     $data['chart_data'] = json_encode($data);
-    return view('chart-js', $data);
+    return view('livewire.admin.chart-js1', $data);
   }
 }

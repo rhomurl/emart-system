@@ -80,5 +80,12 @@
             </div>
         </div>
     </div>
+    
+    
+
+    <div class="grid gap-6 mb-8 md:grid-cols-2">
+        @include('livewire.admin.chart-js1')
+        </div>
+    </div>
 
 </div>

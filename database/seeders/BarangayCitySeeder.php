@@ -36,7 +36,7 @@ class BarangayCitySeeder extends Seeder
             [
                 'id' => 41022,
                 'name' => 'San Jose',
-                'zip' => '4222'
+                'zip' => '4227'
             ],
         ];
         

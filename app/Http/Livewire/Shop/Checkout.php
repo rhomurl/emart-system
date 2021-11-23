@@ -26,6 +26,8 @@ class Checkout extends Component
     
     public function render()
     {
+        
+
         $addresses = AddressBook::with('barangay.city')
         ->where('user_id', Auth::id())
         ->latest()
@@ -73,17 +75,21 @@ class Checkout extends Component
             } 
         );
 
+        if($cartItems->count() == 0){
+            redirect(route('cart'));
+        }
+
         $this->totalCart = $cartItems->sum('total');
+
         if($this->totalCart > 5000){
             $this->shipping = 0;
         }
         else{
-            $this->shipping = 50;
+            $this->shipping = 55;
         }
         
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
-        $this->taxRate = $this->totalCartWithoutTax * 0.12;
-        $this->totalWithTax = $this->totalCartWithoutTax + ($this->totalCartWithoutTax * 0.12);
+        $this->grandTotal = $this->totalCartWithoutTax;
 
         
 
@@ -118,8 +124,7 @@ class Checkout extends Component
                     'address_book_id' => $this->address_book_id/1,
                     'subtotal' => $this->totalCart,
                     'shippingfee' => $this->shipping,
-                    'tax' => $this->taxRate,
-                    'total' => $this->totalWithTax,
+                    'total' => $this->grandTotal,
                     'status' => 'ordered'
                 ]);
 
@@ -137,16 +142,16 @@ class Checkout extends Component
                     $transaction->order_id = $order->id;
                     $transaction->user_id = Auth::user()->id;
                     $transaction->mode = 'cod';
-                    $transaction->status = 'pending';
+                    $transaction->status = 'ordered';
                     $transaction->save();
                 }
 
                 Cart::where('user_id', Auth::user()->id)->delete();        
-                session()->forget('checkout');
+                //session()->forget('checkout');
                 $this->emit('updateCart');
 
                 
-                session()->flash('orderid', $order->id);
+                
                 
                 $user = Auth::user();
                 $orderData = [
@@ -162,7 +167,7 @@ class Checkout extends Component
                 ];
 
                 $user->notify(new OrderConfirmation($orderData));
-
+                session()->flash('orderid', $order->id);
                 return redirect(route('checkout.success'));
             });
         } catch (\Exception $exception){

@@ -28,6 +28,7 @@ Route::get('redirects', 'App\Http\Controllers\AuthRedirect@index')->middleware('
 
 //Shop Routes
 Route::get('/search/{sdata}', Shop\SearchResult::class)->name('shop.searchresult');
+Route::get('/products', Shop\DisplayProducts::class)->name('shop.displayproducts');
 Route::get('/category/{slug}', Shop\SearchCategory::class)->name('shop.searchcategory');
 Route::get('/product/{slug}', Shop\ProductDetails::class)->name('product.details');
 Route::get('/categories', Shop\CategoryPage::class)->name('categorylist');
@@ -38,6 +39,8 @@ Route::get('/checkout/success', Shop\CheckoutSuccess::class)->name('checkout.suc
 Route::name('user.')->prefix('user')->middleware(['check_if_user', 'verified'])->group(function () {
     Route::get('/overview', User\AccountOverview::class)->name('overview');
     Route::get('/address', User\AddressManagement::class)->name('address');
+    Route::get('/settings', User\Settings::class)->name('settings');
+    Route::get('/changepassword', User\ChangePassword::class)->name('changepassword');
     Route::get('/orders', User\MyOrders::class)->name('orders');
     Route::get('/order/{order_id}', User\OrderDetails::class)->name('order.details');
     Route::get('/address/create', User\AddressCreate::class)->name('address.create');

@@ -34,4 +34,15 @@ class ProductComponent extends Component
     public function edit($id){
         $this->emit("openModal", "admin.product-edit", ["id" => $id]);
     }
+    public function confirmDelete($id)
+    {
+        $product_qty = Product::where('id', $id)->whereNull('quantity')->get();
+        if(count($product_qty)){
+            $this->emit("openModal", "admin.failed-modal", ["message" => 'This product cannot be deleted']); 
+        }
+        else{
+            $this->emit("openModal", "admin.success-modal", ["message" => 'Product Deleted Successfully']); 
+            Product::where('id', $id)->delete();
+        }     
+    }
 }

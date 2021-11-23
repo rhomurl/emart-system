@@ -88,12 +88,16 @@
             <div class="card">
                 <div class="card-body">
                         <dl class="dlist-align">
-                            <dt>Total price:</dt>
+                            <dt>Subtotal:</dt>
                             <dd class="text-right">₱ {{ $totalCart }}.00</dd>
                         </dl>
                         <dl class="dlist-align">
-                            <dt>Total:</dt>
-                            <dd class="text-right  h5"><strong>₱ {{ $totalCart }}.00</strong></dd>
+                            <dt>Shipping:</dt>
+                            <dd class="text-right">₱ {{ $shipping }}.00</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Grand Total:</dt>
+                            <dd class="text-right  h5"><strong>₱ {{ $grandTotal }}.00</strong></dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">

@@ -67,14 +67,12 @@
                             <a class="list-group-item {{ \Route::current()->getName() == 'user.overview' ? 'active' : '' }}" href="{{ route('user.overview') }}"> Account overview  </a>
                             <a class="list-group-item {{ \Route::current()->getName() == 'user.address' ? 'active' : '' }}" href="{{ route('user.address') }}"> My Address </a>
                             <a class="list-group-item {{ \Route::current()->getName() == 'user.orders' ? 'active' : '' }}" href="{{ route('user.orders') }}"> My Orders </a>
-                            <a class="list-group-item" href="#"> Settings </a>
-                            <a class="list-group-item" href="page-index-1.html"> Log out </a>
+                            <a class="list-group-item {{ \Route::current()->getName() == 'user.settings' ? 'active' : '' }}" href="{{ route('user.settings') }}"> Edit Profile </a>
+                            <a class="list-group-item {{ \Route::current()->getName() == 'user.changepassword' ? 'active' : '' }}" href="{{ route('user.changepassword') }}"> Change Password </a>
+                            {{--<a class="list-group-item" href="page-index-1.html"> Log out </a>--}}
                         </nav>
                     </aside> <!-- col.// -->
                     <main class="col-md-9">
-                    @if (\Route::current()->getName() == 'user.address')
-                        <a href="{{ route('user.address.create')}}" class="btn btn-light mb-3"> <i class="fa fa-plus"></i> Add new address </a>
-                    @endif 
                     
                         {{ $slot }}
                     

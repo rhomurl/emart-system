@@ -1,12 +1,18 @@
+@section('title')
+    Manage Address    
+@endsection
+
+
 
 @if ($message = Session::get('message'))
-<div class="alert alert-success" role="alert">
-    {{ $message }}
+    @if($addresses->count() < 5)  
+    <div class="alert alert-success" role="alert">
+        {{ $message }}
     </div>
+    @endif
 @endif
 
 <div class="row">
-
     @forelse ($addresses as $address)
         <div class="col-md-6">
             <article class="box mb-4">
@@ -23,7 +29,6 @@
     @endforelse
 </div> <!-- row.// -->
 
-
-@section('title')
-    Manage Address    
-@endsection
+@if($addresses->count() < 5)  
+    <a href="{{ route('user.address.create')}}" class="btn btn-light mb-3"> <i class="fa fa-plus"></i> Add new address </a>
+@endif

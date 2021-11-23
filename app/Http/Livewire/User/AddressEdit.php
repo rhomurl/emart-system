@@ -49,7 +49,7 @@ class AddressEdit extends Component
         try 
         {
             $this->validate([
-                'entry_company' => 'required|string|max:255',
+                'entry_company' => 'string|max:255',
                 'entry_firstname' => 'required|string|max:255',
                 'entry_lastname' => 'required|string|max:255',
                 'entry_street_address' => 'required|max:255',

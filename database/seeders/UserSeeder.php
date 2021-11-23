@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         $role3 = Role::create(['name' => 'super-admin']);
 
 
-        $user = \App\Models\User::factory()->create([
+        $user = User::create([
             'firstname' => 'User',
             'lastname' => 'Test',
             'email' => 'user@ex.com',
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole($role1);
 
-        $user = \App\Models\User::factory()->create([
+        $user = User::create([
             'firstname' => 'Super',
             'lastname' => 'Admin',
             'email' => 'admin@ex.com',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole($role2);
 
-        $user = \App\Models\User::factory()->create([
+        $user = User::create([
             'firstname' => 'Super',
             'lastname' => 'Admin',
             'email' => 'superadmin@ex.com',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
         ]);
         $user->assignRole($role3);
 
-        $user = \App\Models\User::factory()->create([
+        $user = User::create([
             'firstname' => 'Ivan',
             'lastname' => 'Dimayuga',
             'email' => 'kyleivandimayuga20@gmail.com',

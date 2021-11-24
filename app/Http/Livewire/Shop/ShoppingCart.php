@@ -37,7 +37,7 @@ class ShoppingCart extends Component
 
         $this->totalCart = $cartItems->sum('total');
 
-        if($this->totalCart > 2500 || $cartItems->count() == 0){
+        if($this->totalCart > 5000 || $cartItems->count() == 0){
             $this->shipping = 0;
         }
         else{

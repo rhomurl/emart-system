@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\AddressBook;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,14 @@ class OrderDetails extends Component
     public function render()
     {
         $status = 0;
+        
+        $userCheck = Order::where('id', $this->order_id)
+            ->where('user_id', Auth::id())->get();
+
+        if(!count($userCheck)){
+            abort(404);
+        }
+
 
         $order = Order::findorFail($this->order_id);
     

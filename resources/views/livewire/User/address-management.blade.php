@@ -2,7 +2,13 @@
     Manage Address    
 @endsection
 
-
+@if ($message = Session::get('error_msg'))
+    @if($addresses->count() < 5)  
+    <div class="alert alert-warning" role="alert">
+        {{ $message }}
+    </div>
+    @endif
+@endif
 
 @if ($message = Session::get('message'))
     @if($addresses->count() < 5)  

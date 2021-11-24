@@ -23,7 +23,12 @@ class AddressManagement extends Component
 
     public function delete($id)
     {
-        AddressBook::findOrFail($id)->delete();
+        try{
+            AddressBook::findOrFail($id)->delete();
+        } catch(\Exception $e){
+            session()->flash('error_msg', 'This Address Cannot Be Deleted');
+            return redirect(route('user.address'));
+        }
     }
     public function edit($id){
         return redirect()->route('user.address.edit', ['id' => $id]);

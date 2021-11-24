@@ -7,7 +7,7 @@
     <x-slot name="content">
         <div class="px-4 py-3 mb-8 bg-white rounded-lg">
             <!-- Invalid input -->
-            <img src="{{ asset('storage/valid_ids/'. $user_id . '/' . $validid)}}">
+            <img src="{{ asset('storage/valid_ids/'. $user_id . '/' . $validid )}}" onerror="this.src='{{ asset('storage/app/public/valid_ids/'. $user_id . '/' . $validid) }}'">
         </div>
     </x-slot>
 

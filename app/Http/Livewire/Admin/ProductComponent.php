@@ -36,8 +36,9 @@ class ProductComponent extends Component
     }
     public function confirmDelete($id)
     {
-        $product_qty = Product::where('id', $id)->whereNull('quantity')->get();
-        if(count($product_qty)){
+        $prod = Product::where('id', $id)->first();
+
+        if($prod->quantity > 0){
             $this->emit("openModal", "admin.failed-modal", ["message" => 'This product cannot be deleted']); 
         }
         else{

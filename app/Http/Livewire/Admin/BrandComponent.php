@@ -30,6 +30,7 @@ class BrandComponent extends Component
     public function confirmDelete($id)
     {
         $product_qty = DB::table('products')->where('brand_id', '=', $id)->whereNotNull('quantity')->get();
+
         if(count($product_qty)){
             $this->emit("openModal", "admin.failed-modal", ["message" => 'This brand cannot be deleted']); 
         }

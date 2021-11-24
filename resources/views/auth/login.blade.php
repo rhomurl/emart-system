@@ -14,7 +14,7 @@
             </div> <!-- form-group// -->
             
             <div class="form-group">
-                <input input id="password" name="password" class="form-control" placeholder="Password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password">
+                <input input id="password" name="password" class="form-control" placeholder="Password" class="block mt-1 w-full" type="password" name="password" required>
             </div> <!-- form-group// -->
             
             <div class="form-group">

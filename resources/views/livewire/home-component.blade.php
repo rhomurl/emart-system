@@ -146,7 +146,7 @@
             @foreach ($products1 as $product)
                 <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                     <div class="card card-sm card-product-grid">
-                        <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
+                        <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}" onerror="this.src='{{ asset('storage/app/public/') }}/{{ $product->image }}'"> </a>
                         <figcaption class="info-wrap">
                             <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
                             <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->
@@ -160,7 +160,7 @@
             @foreach ($products as $product)
             <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                 <div class="card card-sm card-product-grid">
-                    <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}"> </a>
+                    <a href="{{ route('product.details', $product->slug ) }}" class="img-wrap"> <img src="{{ asset('storage') }}/{{ $product->image }}" onerror="this.src='{{ asset('storage/app/public/') }}/{{ $product->image }}'"> </a>
                     <figcaption class="info-wrap">
                         <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
                         <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->

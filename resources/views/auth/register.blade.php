@@ -11,11 +11,11 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <label>First name</label>
-                            <input id="first_name" class="form-control" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" >
+                            <input id="first_name" class="form-control" type="text" name="first_name" :value="old('first_name')" required autofocus>
                         </div> <!-- form-group end.// -->
                         <div class="col form-group">
                             <label>Last name</label>
-                            <input id="last_name" class="form-control" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" >
+                            <input id="last_name" class="form-control" type="text" name="last_name" :value="old('last_name')" required autofocus>
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
                     <div class="form-group">
@@ -29,44 +29,17 @@
                         <input id="contact_number" class="form-control" type="text" name="contact_number" :value="old('contact_number')" required>
                     </div> 
                     
-                    <!--<div class="form-group">
-                        <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
-                        <span class="custom-control-label"> Male </span>
-                        </label>
-                        <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="gender" value="option2">
-                        <span class="custom-control-label"> Female </span>
-                        </label>
-                    </div> --!> <!-- form-group end.// -->
-
-                    
-                    <!--<div class="form-row">
-                        <div class="form-group col-md-6">
-                        <label>City</label>
-                        <input type="text" class="form-control">
-                        </div> 
-                        <div class="form-group col-md-6">
-                        <label>Country</label>
-                        <select id="inputState" class="form-control">
-                            <option> Choose...</option>
-                            <option>Uzbekistan</option>
-                            <option>Russia</option>
-                            <option selected="">United States</option>
-                            <option>India</option>
-                            <option>Afganistan</option>
-                        </select>
-                        </div> form-group end.</div> -->
-                        <!-- form-row.// -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Create password</label>
-                            <input class="form-control" type="password" name="password" required autocomplete="new-password">
+                            <input class="form-control" type="password" name="password" required>
+                            <small class="form-text text-muted">Password must be atleast 8 characters.</small>
                         </div> <!-- form-group end.// --> 
                         <div class="form-group col-md-6">
                             <label>Repeat password</label>
-                            <input class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" >
+                            <input class="form-control" type="password" name="password_confirmation" required>
                         </div> <!-- form-group end.// -->  
+                        
                     </div>
                     <div class="form-group">
                         <label>Valid ID</label><br>

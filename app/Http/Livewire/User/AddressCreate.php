@@ -45,7 +45,7 @@ class AddressCreate extends Component
     public function storeAddress()
     {
         $this->validate([
-            'entry_company' => 'string|max:255',
+            'entry_company' => 'max:255',
             'entry_firstname' => 'required|string|max:255',
             'entry_lastname' => 'required|string|max:255',
             'entry_street_address' => 'required|max:255',

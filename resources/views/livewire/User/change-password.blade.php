@@ -27,7 +27,7 @@
                 <div class="col form-group">
                     <label>New Password</label>
                       <input wire:model.defer="new_password" type="password" class="form-control">
-                      <small class="form-text text-muted">New password must contain at least 8 characters with 1 small letter, capital letter, number and symbol.</small>
+                      <small class="form-text text-muted">New password must contain at least 8 characters.</small>
                       @error('new_password')
                          <span class="text-danger">
                              {{ $message }}

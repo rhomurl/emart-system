@@ -30,10 +30,6 @@ class ChangePassword extends Component
                 'new_password' => [
                     'required', 
                     'min:8',
-                    'regex:/[a-z]/', 
-                    'regex:/[A-Z]/', 
-                    'regex:/[0-9]/', 
-                    'regex:/[@$!%*#?&]/',
                 ],
                 'new_confirm_password' => ['required', 'same:new_password'],
             ]);

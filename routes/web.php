@@ -30,11 +30,12 @@ Route::get('redirects', 'App\Http\Controllers\AuthRedirect@index')->middleware('
 Route::get('/search/{sdata}', Shop\SearchResult::class)->name('shop.searchresult');
 Route::get('/products', Shop\DisplayProducts::class)->name('shop.displayproducts');
 Route::get('/category/{slug}', Shop\SearchCategory::class)->name('shop.searchcategory');
+Route::get('/category/type/{slug}', Shop\CategoryType::class)->name('shop.categorytype');
 Route::get('/product/{slug}', Shop\ProductDetails::class)->name('product.details');
 Route::get('/categories', Shop\CategoryPage::class)->name('categorylist');
-Route::get('/cart', Shop\ShoppingCart::class)->name('cart');
-Route::get('/checkout', Shop\Checkout::class)->name('checkout');
-Route::get('/checkout/success', Shop\CheckoutSuccess::class)->name('checkout.success');
+Route::get('/cart', Shop\ShoppingCart::class)->name('cart')->middleware('check_if_user');
+Route::get('/checkout', Shop\Checkout::class)->name('checkout')->middleware('check_if_user');
+Route::get('/checkout/success', Shop\CheckoutSuccess::class)->name('checkout.success')->middleware('check_if_user');
 
 Route::name('user.')->prefix('user')->middleware(['check_if_user', 'verified'])->group(function () {
     Route::get('/overview', User\AccountOverview::class)->name('overview');

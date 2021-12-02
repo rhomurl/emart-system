@@ -3,7 +3,7 @@
 
     <ol class="breadcrumb py-2">
       <li class="breadcrumb-item"><a href="{{ route('user_home') }}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('shop.searchcategory', $product->category->slug) }}">{{ $product->category->name }}</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('shop.searchcategory', $product->category->slug) }}">{{ $product->category->name }} - {{ $product->category->type }}</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
   </ol>
   <!-- ============================ ITEM DETAIL ======================== -->
@@ -76,7 +76,7 @@
 
     </dd>
   </dl>
-  
+      @role('customer')
       <div class="form-row">
           <div class="form-group col-md">
             @if ($product->quantity == 0)
@@ -92,6 +92,7 @@
                   
           </div> <!-- col.// -->
       </div> <!-- row.// -->
+      @endrole
   <hr>
   </article> <!-- product-info-aside .// -->
           </main> <!-- col.// -->

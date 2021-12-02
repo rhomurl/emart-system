@@ -124,7 +124,13 @@
                         
                         <p class="text-muted mt-3">{{ $result->category->name }}</p>
                         <p class="mt-3">
+                            @if($result->quantity)
+                            @role('customer')
                             <a wire:click.prevent="addToCart({{ $result->id }})" href="#" class="btn btn-outline-primary"> Add to Cart </a>
+                            @endrole
+                            @else
+                                Out of stock
+                            @endif
                         </p>
                     </div> <!-- info-aside.// -->
                 </aside> <!-- col.// -->

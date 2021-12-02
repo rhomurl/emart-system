@@ -150,8 +150,10 @@
                         <figcaption class="info-wrap">
                             <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
                             <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                            @role('customer')
                             <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
                                 Add to cart</a>
+                            @endrole
                         </figcaption>
                     </div>
                 </div> <!-- col.// -->
@@ -164,8 +166,10 @@
                     <figcaption class="info-wrap">
                         <a href="{{ route('product.details', $product->slug ) }}" class="title">{{ $product->name }}</a>
                         <div class="price mt-1">₱ {{ $product->selling_price }}</div> <!-- price-wrap.// -->
+                        @role('customer')
                         <a wire:click.prevent="addToCart({{ $product->id }})" href="#" class="btn btn-primary"> 
                             Add to cart</a>
+                        @endrole
                     </figcaption>
                 </div>
             </div> <!-- col.// -->

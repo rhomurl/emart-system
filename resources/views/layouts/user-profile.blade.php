@@ -8,7 +8,7 @@
         <meta name="keywords" content="e-mart, Allena mindoro store, balete batangas">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <link href="{{ asset('images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 

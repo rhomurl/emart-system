@@ -20,6 +20,15 @@
             </div>
         </div>
     </td>
+
+    <td class="px-4 py-3">
+        <div class="flex items-center text-sm">
+            <!-- Avatar with inset shadow -->
+            <div>
+                <p class="font-semibold">{{ $category->type }}</p>
+            </div>
+        </div>
+    </td>
     
     
     <td class="px-4 py-3">

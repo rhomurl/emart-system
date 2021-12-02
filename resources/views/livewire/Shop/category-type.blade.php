@@ -6,8 +6,8 @@
         <div class="card-body">
             <ol class="breadcrumb float-left">
                 <li class="breadcrumb-item"><a href="{{ route('user_home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Category</a></li>
-                <li class="breadcrumb-item active">{{ $this->catname->name }}</li>
+                <li class="breadcrumb-item"><a href="#">Category Type</a></li>
+                <li class="breadcrumb-item active">{{ $this->slug }}</li>
             </ol>
         </div> <!-- card-body .// -->
     </div> <!-- card.// -->

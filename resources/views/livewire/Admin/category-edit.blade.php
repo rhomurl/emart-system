@@ -26,6 +26,22 @@
                 </span>
                 <input wire:model.defer="slug" class="block w-full mt-1 text-sm border rounded appearance-none p-2  focus:shadow-outline-blue focus:outline-none  form-input" placeholder="" disabled>
             </label>
+
+            <label class="block mt-4 text-sm">
+                <span class="text-gray-700">
+                    Type
+                </span>
+                <select wire:model="type" class="block w-full mt-1 text-sm border rounded appearance-none form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple" required>
+                    <option value="">Choose category</option>
+                    <option value="Perishable">Perishable</option>
+                    <option value="Non-perishable">Non Perishable</option>
+                </select>
+                @error('type')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                    {{ $message }}
+                </span>
+            @enderror
+            </label>
         </div>
     </x-slot>
 

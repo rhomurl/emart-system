@@ -7,16 +7,20 @@ use LivewireUI\Modal\ModalComponent;
 
 class CategoryModal extends ModalComponent
 {
-    public $category, $name, $category_id;
+    public $category, $name, $category_id, $type;
 
     public function create(){
         $this->validate([
             'name' => 'required|regex:/[a-zA-Z0-9\s]+/|unique:categories',
+            'type' => 'string|required'
         ]);
 
         $category = Category::updateOrCreate(
             ['id' => $this->category_id],
-            ['name' => $this->name]
+            [
+                'name' => $this->name, 
+                'type' => $this->type
+            ]
         );
         
         $this->emit("openModal", "admin.success-modal", ["message" => $this->category_id ? 'Category Updated Successfully.' : 'Category Added Successfully']);

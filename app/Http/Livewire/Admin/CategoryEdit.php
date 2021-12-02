@@ -7,7 +7,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class CategoryEdit extends ModalComponent
 {
-    public $category, $name, $category_id, $slug;
+    public $category, $name, $category_id, $slug, $type;
 
     public function mount($id)
     {
@@ -15,16 +15,21 @@ class CategoryEdit extends ModalComponent
             $category = Category::findOrFail($this->category_id);
             $this->name = $category->name;
             $this->slug = $category->slug;
+            $this->type = $category->type;
     }
 
     public function create(){
         $this->validate([
-            'name' => 'required|regex:/[a-zA-Z0-9\s]+/|unique:categories',
+            'name' => 'required|regex:/[a-zA-Z0-9\s]+/|unique:categories,name,'.$this->category_id.'',
+            'type' => 'string|required'
         ]);
 
         $category = Category::updateOrCreate(
             ['id' => $this->category_id],
-            ['name' => $this->name]
+            [
+                'name' => $this->name,
+                'type' => $this->type
+            ]
         );
         
         

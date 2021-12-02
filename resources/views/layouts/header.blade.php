@@ -164,17 +164,18 @@
                 <a class="nav-link" href="{{ route('shop.displayproducts')}}">All Products</a>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('shop.searchcategory', 'fruits-vegetables')}}">Fruits and Vegetables</a>
+              <a class="nav-link" href="{{ route('shop.categorytype', 'Perishable')}}">Perishable</a>
             </li>
+            <li class="nav-item">
+               <a class="nav-link" href="{{ route('shop.categorytype', 'Non-perishable') }}">Non-Perishable</a>
+              </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('shop.searchcategory', 'canned-goods')}}">Canned Goods</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('shop.searchcategory', 'rice')}}">Rice</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('shop.searchcategory', 'dairy-products') }}">Dairy Products</a>
-            </li>
+           
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
               <div class="dropdown-menu">

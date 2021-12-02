@@ -89,7 +89,7 @@
                 </figure>
             </div> <!-- col.// -->
         @empty
-            No recent orderes
+            <span class="px-2">No recent orders</span>
         @endforelse
     </div> <!-- row.// -->
 

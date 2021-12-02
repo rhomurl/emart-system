@@ -6,7 +6,7 @@
             <header class="section-heading heading-line">
                 <h4 class="title-section text-uppercase">We only deliver in the following areas</h4>
             </header>
-            <h3>Cuenca, Balete, Batangas City, and San Jose</h2>
+            <h3>Cuenca (Bungahan & Cuenca Bayan), Balete, Batangas City, and San Jose (Natunuan Talipapa)</h2>
             {{--
             <ul class="row mt-4">
                 <li class="col-md col-6"><a href="#" class="icontext"> <img class="icon-flag-sm" src="images/icons/flags/CN.png"> <span>China</span> </a></li>
@@ -102,12 +102,12 @@
         
                     <div class="card-banner border-bottom">
                     <div class="py-5" style="width:80%">
-                        <a href="#" class="btn btn-secondary btn"> Frozen Foods </a>
+                        <a href="#" class="btn btn-secondary btn"> Canned Goods </a>
                         {{--<h6 class="card-title">Category 2</h6>
                         <a href="#" class="btn btn-secondary btn-sm"> Source now </a>--}}
                     </div> 
-                    <a href="{{ route('shop.searchcategory', 'frozen-foods') }}">
-                        <img src="images/items/2.jpg" height="80" class="img-bg">
+                    <a href="{{ route('shop.searchcategory', 'canned-goods') }}">
+                        <img src="{{ asset("storage/images/products/argentina-corned-beef-260g-png.png") }}" height="80" class="img-bg">
                     </a>
                     </div>
         

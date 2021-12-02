@@ -145,6 +145,17 @@
                             </a>
                         </li>
                     </ul>
+                    <ul>
+                        <li class="relative px-6 py-3">
+                           <span class="absolute inset-y-0 left-0 w-1 {{ \Route::current()->getName() == 'admin.vouchers' ? 'bg-purple-800' : '' }} rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                            <a class="inline-flex items-center w-full text-sm font-semibold {{ \Route::current()->getName() == 'admin.vouchers' ? 'text-gray-800 dark:text-gray-100' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="{{ route('admin.vouchers') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                                  </svg>
+                                <span class="ml-4">Vouchers</span>
+                            </a>
+                        </li>
+                    </ul>
                     
                     <div class="px-6 my-6">
                         <form method="POST" action="{{ route('logout') }}">
@@ -320,6 +331,18 @@
                             </a>
                         </li>
                     </ul>
+                    <ul>
+                        <li class="relative px-6 py-3">
+                            <span class="absolute inset-y-0 left-0 w-1 {{ \Route::current()->getName() == 'admin.vouchers' ? 'bg-purple-800' : '' }} rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                            <a class="inline-flex items-center w-full text-sm font-semibold {{ \Route::current()->getName() == 'admin.vouchers' ? 'text-gray-800 dark:text-gray-100' : '' }} transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100" href="{{ route('admin.vouchers') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                                  </svg>
+                                <span class="ml-4">Vouchers</span>
+                            </a>
+                        </li>
+                    </ul>
+
                     <div class="px-6 my-6">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

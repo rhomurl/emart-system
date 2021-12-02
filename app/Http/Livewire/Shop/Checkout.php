@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Shop;
 
 use App\Models\Cart;
-use App\Models\User;
+use App\Models\Voucher;
+//use App\Models\Address;
 use App\Models\Order;
-use App\Models\OrderProduct;
+//use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\AddressBook;
 
+use Session;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +24,7 @@ use Livewire\Component;
 
 class Checkout extends Component
 {
+    public $voucher, $discount, $voucher_msg, $vouchercount, $usage_qty;
     public $address_book_id, $payment_mode, $checkout_message, $shipping;
     
     public function render()
@@ -81,12 +84,17 @@ class Checkout extends Component
 
         $this->totalCart = $cartItems->sum('total');
 
-        if($this->totalCart > 5000){
+        if($this->totalCart > 2500){
             $this->shipping = 0;
         }
         else{
-            $this->shipping = 55;
+            if($this->address_book_id){
+                $addr = AddressBook::where('id', $this->address_book_id)->first();
+                $this->shipping = $addr->barangay->shippingfee;
+            }
         }
+
+        
         
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
         $this->grandTotal = $this->totalCartWithoutTax;
@@ -98,7 +106,43 @@ class Checkout extends Component
         return view('livewire.shop.checkout', compact('addresses', 'cartItems'))->layout('layouts.user');
     }
 
-    public function placeOrder(){
+    public function applyCoupon(){
+
+        
+        $voucher = Voucher::where('code', $this->voucher)->first();
+        
+
+        if(!$this->address_book_id){
+            $this->voucher_msg = 'Select an address first!';
+        }
+        else if($voucher)
+        {
+            if($this->grandTotal < $voucher->min_spend){
+                $this->voucher_msg = 'You are not qualified from this promo.';
+            }
+            else if($voucher->usage_qty == 0){
+                $this->voucher_msg = 'Voucher is invalid or expired';
+            }
+            else{
+                $this->voucherqty = $voucher->usage_qty/1; 
+                if($voucher->discount_type == 'percent'){
+                    $dsc = $voucher->discount_amt/100;
+                    $this->discount = $dsc * $this->grandTotal;
+                }
+                else{
+                    $this->discount = $voucher->discount_amt/1;
+                }
+                $this->grandTotal = $this->grandTotal - $this->discount;
+                $this->voucher_msg = 'Voucher code applied!';
+            }
+        }
+        else {
+            $this->voucher_msg = 'Voucher is invalid or expired';
+        }
+    }
+        
+    public function placeOrder()
+    {
 
         $this->validate([
             'address_book_id' => 'required',
@@ -118,13 +162,15 @@ class Checkout extends Component
         }
 
         try{
+            $this->resetValidation();
             DB::transaction(function () use ($cart) {
                 $order = Order::create([
                     'user_id' => auth()->id(),
                     'address_book_id' => $this->address_book_id/1,
                     'subtotal' => $this->totalCart,
+                    'discount' => $this->discount,
                     'shippingfee' => $this->shipping,
-                    'total' => $this->grandTotal,
+                    'total' => $this->grandTotal - $this->discount,
                     'status' => 'ordered'
                 ]);
 
@@ -146,12 +192,22 @@ class Checkout extends Component
                     $transaction->save();
                 }
 
+            if($this->voucher)
+            {
+                if($this->voucherqty != 0){
+                    Voucher::updateOrCreate(
+                        ['code' => $this->voucher],
+                        ['usage_qty' => $this->voucherqty - 1]
+                    );
+                }
+            }
+
                 Cart::where('user_id', Auth::user()->id)->delete();        
                 //session()->forget('checkout');
                 $this->emit('updateCart');
 
-                
-                
+                Session::flash('orderid', $order->id);
+                //session()->flash('orderid', );
                 
                 $user = Auth::user();
                 $orderData = [
@@ -167,95 +223,12 @@ class Checkout extends Component
                 ];
 
                 $user->notify(new OrderConfirmation($orderData));
-                session()->flash('orderid', $order->id);
+                
                 return redirect(route('checkout.success'));
             });
         } catch (\Exception $exception){
-            $this->checkout_message = "Something wrong";
-            //dd($exception->getMessage());
+            //$this->checkout_message = "Something wrong";
+            dd($exception->getMessage());
         }
-
-
-
-        /*
-        $order->user_id = Auth::user()->id;
-        $order->address_id = $this->address_id;
-        $order->subtotal = session()->get('checkout')['subtotal'];
-        $order->shippingfee = session()->get('checkout')['shipping'];
-        $order->tax = session()->get('checkout')['tax'];
-        $order->total = session()->get('checkout')['total'];
-        $order->status = 'ordered';
-        $order->save();
-
-        $this->validate([
-            'address_id' => 'required',
-            'payment_mode' => 'required',
-        ]);
-
-        $order = new Order();
-        $order->user_id = Auth::user()->id;
-        $order->address_id = $this->address_id;
-        $order->subtotal = session()->get('checkout')['subtotal'];
-        $order->shippingfee = session()->get('checkout')['shipping'];
-        $order->tax = session()->get('checkout')['tax'];
-        $order->total = session()->get('checkout')['total'];
-        $order->status = 'ordered';
-        $order->save();
-
-        $cartItems = Cart::with('products')->get()->where('user_id', Auth::id())
-            ->map(function (Cart $items) {
-                return (object)[
-                    'id' => $items->product_id,
-                    'user_id'=> $items->user_id,
-                    'slug' => $items->products->slug,
-                    'name' => $items->products->name,
-                    'image' => $items->products->image,
-                    'selling_price' => $items->products->selling_price,
-                    'qty' => $items->qty,
-                    'total' => ($items->qty * $items->products->selling_price),
-                ];
-            } 
-        );
-            
-        foreach($cartItems as $item)
-        {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $item->id;
-            $orderItem->user_id = Auth::user()->id;
-            $orderItem->price = $item->selling_price;
-            $orderItem->quantity = $item->qty;
-            $orderItem->save();
-
-            $product1 = Product::where('id', '=',$orderItem->product_id)->first();
-            $q1 = $item->qty;
-            $q2 = $product1->quantity;
-            $sm = $q2 - $q1;
-            $product = Product::where('id', $orderItem->product_id)->update(array('quantity' => $sm));
-        }
-
-        if($this->payment_mode == 'cod'){
-            $transaction = new Transaction();
-            $transaction->order_id = $order->id;
-            $transaction->user_id = Auth::user()->id;
-            $transaction->mode = 'cod';
-            $transaction->status = 'pending';
-            $transaction->save();
-        }
-
-        Cart::where('user_id', Auth::id())->delete();
-        
-        session()->forget('checkout');
-        $this->emit('updateCart');
-
-        
-        session()->flash('orderid', $order->id);
-        return redirect(route('checkout.success'));
-        */
-    }
-
-    public function sendTestNotification($orderId, $orderTotal)
-    {
-        
     }
 }

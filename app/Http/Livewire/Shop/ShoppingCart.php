@@ -37,15 +37,7 @@ class ShoppingCart extends Component
 
         $this->totalCart = $cartItems->sum('total');
 
-        if($this->totalCart > 5000 || $cartItems->count() == 0){
-            $this->shipping = 0;
-        }
-        else{
-            $this->shipping = 55;
-        }
         $this->totalCartWithoutTax = $cartItems->sum('total') + $this->shipping;
-        $this->grandTotal = $this->totalCartWithoutTax;
-        
 
         return view('livewire.shop.shopping-cart', compact('cartItems'))->layout('layouts.user');
     }
@@ -64,9 +56,6 @@ class ShoppingCart extends Component
             }
             return redirect()->route('checkout');
         }
-
-       
-
     }
 
     public function increaseQuantity($id)

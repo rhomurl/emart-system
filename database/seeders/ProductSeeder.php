@@ -16,55 +16,21 @@ class ProductSeeder extends Seeder
     {
         $product = [
             [
-                'name' => 'Fresh Carrots 500g',
-                'slug' => 'fresh-carrots-500g',
-                'description' => 'This is fresh carrot',
-                'selling_price' => '60',
-                'quantity' => '10',
-                'image' => 'images/products/carrots.jpg',
-                'category_id' => '1',
-                'brand_id' => '1',
-            ],
-
-            [
-                'name' => 'Dinurado Rice',
-                'slug' => 'dinurado-rice',
-                'description' => 'This is rice',
-                'selling_price' => '55',
-                'quantity' => '20',
-                'image' => 'images/products/dnd-rice.jpg',
-                'category_id' => '4',
-                'brand_id' => '2',
-            ],
-
-            [
                 'name' => 'Egg (5 Pieces)',
                 'slug' => 'egg-5-pieces',
-                'description' => 'This is egg',
+                'description' => 'This is an egg',
                 'selling_price' => '20',
-                'quantity' => '5',
+                'quantity' => '99',
                 'image' => 'images/products/egg.jpg',
                 'category_id' => '8',
                 'brand_id' => '1',
             ],
-
-            [
-                'name' => 'Milagrosa Rice',
-                'slug' => 'milagrosa-rice',
-                'description' => 'This is rice',
-                'selling_price' => '57',
-                'quantity' => '16',
-                'image' => 'images/products/pure-milagrosa.jpg',
-                'category_id' => '4',
-                'brand_id' => '3',
-            ],
-
             [
                 'name' => 'Nissin Cup Noodles (Seafood)',
                 'slug' => 'nissin-cup-noodles-seafood',
                 'description' => 'This is cup noodles',
                 'selling_price' => '17',
-                'quantity' => '50',
+                'quantity' => '99',
                 'image' => 'images/products/seafood-cup-noodles.jpg',
                 'category_id' => '5',
                 'brand_id' => '4',
@@ -75,7 +41,7 @@ class ProductSeeder extends Seeder
                 'slug' => 'colgate-toothpaste',
                 'description' => 'This is colgate',
                 'selling_price' => '6',
-                'quantity' => '10',
+                'quantity' => '99',
                 'image' => 'images/products/1.jpg',
                 'category_id' => '9',
                 'brand_id' => '5',
@@ -805,7 +771,7 @@ class ProductSeeder extends Seeder
                 "slug" => "sayote-per-kilo",
                 "description" => "Sayote is a fast-growing climbing vine with characteristics tendrils. It bears small white unisexual flowers and green pear-shaped fruits with furrows.",
                 "selling_price" => "50",
-                "quantity" => "10",
+                "quantity" => "99",
                 "image" => "images/products/sayote-kl-png.png",
                 "category_id" => "1",
                 "brand_id" => "1"
@@ -815,7 +781,7 @@ class ProductSeeder extends Seeder
                 "slug" => "pechay-per-bundle",
                 "description" => "Pechay is an erect, biennial herb, cultivated as an annual about 15-30 cm tall in vegetative stage. Ovate leaves are arranged spirally and spreading.",
                 "selling_price" => "10",
-                "quantity" => "20",
+                "quantity" => "99",
                 "image" => "images/products/pechay-per-bundle-png.png",
                 "category_id" => "1",
                 "brand_id" => "1"

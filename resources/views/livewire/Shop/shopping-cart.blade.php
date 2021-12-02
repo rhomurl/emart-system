@@ -79,7 +79,7 @@
     </div> <!-- card.// -->
 
     <div class="alert alert-success mt-3">
-        <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Shipping for Orders Above 5000 PHP</p>
+        <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Shipping for Orders Above 2500 PHP</p>
     </div>
 
     </main> <!-- col.// -->
@@ -93,11 +93,7 @@
                         </dl>
                         <dl class="dlist-align">
                             <dt>Shipping:</dt>
-                            <dd class="text-right">₱ {{ $shipping }}.00</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Grand Total:</dt>
-                            <dd class="text-right  h5"><strong>₱ {{ $grandTotal }}.00</strong></dd>
+                            <dd class="text-right"> Computed at checkout</dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">

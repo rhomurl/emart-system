@@ -14,6 +14,13 @@ class ProductModal extends ModalComponent
 
     public $product, $name, $category_id, $brand_id, $product_id, $slug, $description, $selling_price, $quantity, $image;
 
+    public function mount(){
+
+        $this->categories = Category::all();
+        $this->brands = Brand::all();
+
+    }
+
     public function create(){
         $this->validate([
             'name' => 'required|regex:/[a-zA-Z0-9\s]+/|unique:products,name,'.$this->product_id.'',
@@ -49,8 +56,6 @@ class ProductModal extends ModalComponent
 
     public function render()
     {
-        $categories = Category::get();
-        $brands = Brand::get();
-        return view('livewire.admin.product-modal', compact('categories', 'brands'));
+        return view('livewire.admin.product-modal');
     }
 }

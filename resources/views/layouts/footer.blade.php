@@ -79,7 +79,7 @@
 				<aside class="col-sm-2  col-md-2">
 					<h6 class="title">Contact Us</h6>
 					<div>
-						<a class="btn btn-icon btn-light" title="Email" href="mailto:ems.almarez@gmail.com"><i class="icon fa fa-envelope"></i></a> ems.almarez@gmail.com<br>
+						<a class="btn btn-icon btn-light" title="Email" href="mailto:mindoroallenastore@gmail.com"><i class="icon fa fa-envelope"></i></a> ems.almarez@gmail.com<br>
 						<a class="btn btn-icon btn-light" title="Contact Number" href="#"><i class="icon fa fa-phone"></i> </a> (043) 318-2109 / <br> +(63) 995-609-3956 
 					</div>
 				</aside>
@@ -87,9 +87,6 @@
 		</section>	<!-- footer-top.// -->
 
 		<section class="footer-copyright border-top">
-				<p target="_blank" class="float-right text-muted">
-					<a href="#">Privacy &amp; Cookies</a> &nbsp;   &nbsp; 
-				</p>
 				<p class="text-muted"> © 2021 Alena Mindoro • All rights reserved </p>
 				
 		</section>

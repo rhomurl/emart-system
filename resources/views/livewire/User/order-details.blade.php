@@ -35,6 +35,7 @@
                         @if($address->entry_company)
                             {{ $address->entry_company }}<br>
                         @endif
+                        <b>Landmark:</b> {{ $address->entry_landmark }}<br>
                         {{ $address->entry_street_address }}<br> {{ $address->barangay->name }}, {{ $address->barangay->city->name }}, {{ $address->barangay->city->zip }}<br>{{ $address->entry_phonenumber }}  
                     </p>
                 </div>
@@ -52,6 +53,9 @@
                         @else
                             {{ $order->shippingfee }}
                         @endif <br> 
+                        @if($order->discount)
+                            <span class="b">Discount: ₱  {{ $order->discount }} </span><br>
+                        @endif
                         <span class="b">Total: ₱ {{ $order->total }} </span>
                     </p>
                 </div>

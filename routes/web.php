@@ -55,6 +55,7 @@ Route::name('admin.')->prefix('admin')->middleware(['check_if_admin'])->group(fu
     Route::get('usermanagement', Admin\UserManagement::class)->name('manageuser');
     Route::get('orders', Admin\UserOrders::class)->name('orders');
     Route::get('/order/{order_id}', Admin\OrderDetails::class)->name('order.details');
+    Route::get('vouchers', Admin\VoucherComponent::class)->name('vouchers');
 }); 
 
 Route::middleware(['auth:sanctum', 'verified', 'check_if_admin'])->get('/dashboard', function () {

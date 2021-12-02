@@ -46,6 +46,15 @@
                         </span>
                     @enderror
             </div> <!-- form-group end.// -->
+            <div class="col form-group">
+                <label>Landmark</label>
+                  <input wire:model="entry_landmark" name="entry_landmark" type="text" class="form-control" value="">
+                  @error('entry_landmark')
+                        <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                    @enderror
+            </div> <!-- form-group end.// -->
         </div> <!-- form-row.// -->
 
           <div class="form-row">

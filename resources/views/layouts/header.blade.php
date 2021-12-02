@@ -6,7 +6,7 @@
       </button>
       <div class="navbar-collapse collapse" id="navbarTop4" style="">
         <ul class="navbar-nav mr-auto">
-            <li>Free Shipping for Orders Above 5000 PHP</li>
+            <li>Free Shipping for Orders Above 2500 PHP</li>
 
             <!--
                 <li class="nav-item dropdown">
@@ -28,7 +28,7 @@
             -->
         </ul>
         <ul class="navbar-nav">
-            <li><a href="mailto:ems.almarez@gmail.com" class="nav-link"> <i class="fa fa-comment"></i> Email </a></li>
+            <li><a href="mailto:mindoroallenastore@gmail.com" class="nav-link"> <i class="fa fa-comment"></i> Email </a></li>
             <li><a href="tel:+639956093956" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
         </ul> <!-- list-inline //  -->
       </div> <!-- navbar-collapse .// -->

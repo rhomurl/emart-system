@@ -20,6 +20,7 @@ class CreateAddressBook extends Migration
             $table->string('entry_firstname', 32);
             $table->string('entry_lastname', 32);
             $table->string('entry_street_address', 64);
+            $table->string('entry_landmark', 128);
             $table->foreignId('barangay_id')->constrained('barangays');
             $table->string('entry_phonenumber', 16);     
             $table->timestamps();

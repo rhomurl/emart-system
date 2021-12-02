@@ -45,6 +45,9 @@
                         @else
                             {{ $order->shippingfee }}
                         @endif <br> 
+                        @if($order->discount)
+                            <span class="b">Discount: ₱  {{ $order->discount }} </span><br>
+                        @endif
                         <span class="b">Total: ₱ {{ $order->total }} </span>
                     </p>
                 </div>

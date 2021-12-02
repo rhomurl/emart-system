@@ -12,7 +12,7 @@ class BrandEdit extends ModalComponent
     public function mount($id)
     {
         $this->brand_id = $id;
-        $brand = brand::findOrFail($this->brand_id);
+        $brand = Brand::findOrFail($this->brand_id);
         $this->name = $brand->name;
         $this->slug = $brand->slug;
     }

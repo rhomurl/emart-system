@@ -15,7 +15,7 @@ class Order extends Model
         'address_book_id', 
         'subtotal',
         'shippingfee',
-        'tax',
+        'discount',
         'total',
         'status',
     ];

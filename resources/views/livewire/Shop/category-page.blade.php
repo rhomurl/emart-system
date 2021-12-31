@@ -7,7 +7,7 @@
                 
                 <div class="card mb-3">
                   <div class="img-wrap" style="background: #ffd7d7">
-                    <a href="{{ route('product.details', $category->slug ) }}">
+                    <a href="{{ route('product.details', $category->slug ) }}" onerror="this.src='{{ asset('storage/app/public/') }}/{{ $category->image }}'">
                       <img src="images/items/1.jpg">
                     </a>
                     </div>

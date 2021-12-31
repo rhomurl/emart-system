@@ -227,8 +227,8 @@ class Checkout extends Component
                 return redirect(route('checkout.success'));
             });
         } catch (\Exception $exception){
-            //$this->checkout_message = "Something wrong";
-            dd($exception->getMessage());
+            $this->checkout_message = "Something wrong";
+            //dd($exception->getMessage());
         }
     }
 }

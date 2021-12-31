@@ -8,13 +8,15 @@ use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+Use DB;
 
 class CategoryType extends Component
 {
     use WithPagination;
     public $slug;
-    public $perpage;
+    public $perpage = 10;
     public $catname;
+    public $slugproduct;
 
     public function mount($slug)
     {
@@ -23,17 +25,27 @@ class CategoryType extends Component
     
     public function render()
     {
-        $category_id = Category::select('id')->where('type', '=', $this->slug)->firstOrFail();
+        //$category_id = Category::select('id')->where('type', '=', $this->slug)->firstOrFail();
        
        //dd($category_id);
-       $results = Product::where('category_id', $category_id->id) 
-            ->paginate($this->perpage);
-        
-        $resultCount = Product::where('category_id', $category_id->id)
-            ->count();
+       //$results = Product::where('category_id', $category_id->id)->paginate($this->perpage);
+    
+        $results = DB::table('categories')
+        ->leftJoin('products', 'categories.id', '=', 'products.category_id')
+        ->select('categories.name as catname','products.name', 'products.id', 'products.slug as slugproduct', 'products.image', 'products.name', 'products.quantity', 'products.description','products.selling_price')
+        ->where('categories.type', $this->slug)
+        ->whereNotNull('products.name')
+        ->paginate($this->perpage);
 
+        $resultcount = DB::table('categories')
+        ->leftJoin('products', 'categories.id', '=', 'products.category_id')
+        ->select('categories.name as catname','products.name', 'products.id', 'products.slug as slugproduct', 'products.image', 'products.name', 'products.quantity', 'products.description','products.selling_price')
+        ->where('categories.type', $this->slug)
+        ->whereNotNull('products.name')->count();
+   
+        //dd($results);
 
-        return view('livewire.shop.category-type', compact('results', 'resultCount'))->layout('layouts.user');
+        return view('livewire.shop.category-type', compact('results', 'resultcount'))->layout('layouts.user');
     }
 
     public function addToCart($productId)

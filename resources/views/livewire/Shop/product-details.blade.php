@@ -158,7 +158,7 @@
     <!--============ SECTION END=============-->
 
 
-
+@if($related_products->count())
 <div class="container">
   <div class="card card-body">
     
@@ -181,4 +181,6 @@
       @endforeach <!-- col.// -->
     </div> <!-- row.// -->
   </div>
-</div><br><br>
+</div>
+@endif
+<br><br>
